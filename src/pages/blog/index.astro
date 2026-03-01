@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+})).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Blog — Kai Sheng" description="Blog posts by Kai Sheng">
+  <header class="py-8 pb-4">
+    <h1 class="text-3xl font-bold tracking-tight text-[var(--color-text)]">Blog</h1>
+  </header>
+  <main>
+    {posts.length === 0 ? (
+      <p class="text-[var(--color-muted)]">No posts yet. Check back soon!</p>
+    ) : (
+      <ul class="flex list-none flex-col gap-8 py-8">
+        {posts.map((post) => (
+          <li>
+            <a
+              href={`/blog/${post.id.replace(/\.mdx?$/, "")}`}
+              class="block"
+            >
+              <h2 class="text-xl font-semibold text-[var(--color-text)]">
+                {post.data.title}
+              </h2>
+              <time class="text-sm text-[var(--color-muted)]" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              {post.data.description && (
+                <p class="mt-1 text-[0.95rem] text-[var(--color-muted)]">
+                  {post.data.description}
+                </p>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</BaseLayout>
