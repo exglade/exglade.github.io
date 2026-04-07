@@ -1,5 +1,5 @@
+import { Mesh, Program, Renderer, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
-import { Renderer, Program, Mesh, Triangle } from "ogl";
 
 interface GrainientProps {
   timeSpeed?: number;

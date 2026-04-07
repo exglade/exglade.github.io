@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { motion } from "motion/react";
 import type { HTMLMotionProps } from "motion/react";
+import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 interface DecryptedTextProps extends HTMLMotionProps<"span"> {
   text: string;
@@ -51,16 +51,9 @@ export default function DecryptedText({
         case "center": {
           const middle = Math.floor(textLength / 2);
           const offset = Math.floor(revealedSet.size / 2);
-          const nextIndex =
-            revealedSet.size % 2 === 0
-              ? middle + offset
-              : middle - offset - 1;
+          const nextIndex = revealedSet.size % 2 === 0 ? middle + offset : middle - offset - 1;
 
-          if (
-            nextIndex >= 0 &&
-            nextIndex < textLength &&
-            !revealedSet.has(nextIndex)
-          ) {
+          if (nextIndex >= 0 && nextIndex < textLength && !revealedSet.has(nextIndex)) {
             return nextIndex;
           }
 
@@ -78,10 +71,7 @@ export default function DecryptedText({
       ? Array.from(new Set(text.split(""))).filter((char) => char !== " ")
       : characters.split("");
 
-    const shuffleText = (
-      originalText: string,
-      currentRevealed: Set<number>,
-    ): string => {
+    const shuffleText = (originalText: string, currentRevealed: Set<number>): string => {
       if (useOriginalCharsOnly) {
         const positions = originalText.split("").map((char, index) => ({
           char,
@@ -216,19 +206,18 @@ export default function DecryptedText({
     >
       <span className="sr-only">{displayText}</span>
       <span aria-hidden="true">
-        {displayText.split("").map((char, index) => {
-          const isRevealedOrDone =
-            revealedIndices.has(index) || !isScrambling || !isHovering;
+        {displayText
+          .split("")
+          .map((char, index) => ({ char, index, key: `${char}-${index}` }))
+          .map(({ char, index, key }) => {
+            const isRevealedOrDone = revealedIndices.has(index) || !isScrambling || !isHovering;
 
-          return (
-            <span
-              key={`${char}-${index}`}
-              className={isRevealedOrDone ? className : encryptedClassName}
-            >
-              {char}
-            </span>
-          );
-        })}
+            return (
+              <span key={key} className={isRevealedOrDone ? className : encryptedClassName}>
+                {char}
+              </span>
+            );
+          })}
       </span>
     </motion.span>
   );

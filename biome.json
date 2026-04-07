@@ -1,0 +1,94 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      "astro.config.mjs",
+      "biome.json",
+      "package.json",
+      "tsconfig.json",
+      "src/**/*",
+      "!src/next-app",
+      "!src/content/**/*.md",
+      "!!dist",
+      "!!.astro",
+      "!!node_modules",
+      "!!package-lock.json"
+    ],
+    "ignoreUnknown": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "all",
+      "semicolons": "always"
+    },
+    "jsxRuntime": "transparent"
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "assist": {
+      "enabled": true
+    }
+  },
+  "html": {
+    "experimentalFullSupportEnabled": true,
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "assist": {
+      "enabled": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["*.astro", "src/**/*.astro"],
+      "formatter": {
+        "enabled": true
+      },
+      "linter": {
+        "enabled": true
+      }
+    },
+    {
+      "includes": ["*.tsx", "*.jsx", "src/**/*.{tsx,jsx}"],
+      "javascript": {
+        "jsxRuntime": "transparent"
+      }
+    }
+  ]
+}

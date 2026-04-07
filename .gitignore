@@ -18,3 +18,7 @@ Thumbs.db
 # editor
 .vscode/
 *.swp
+
+# local agent tooling
+.agents/
+.codex/

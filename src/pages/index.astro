@@ -1,14 +1,56 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import DecryptedText from "../components/DecryptedText";
+import ExperienceAccordion from "../components/ExperienceAccordion";
 import Grainient from "../components/Grainient";
-import TextType from "../components/TextType";
 import SocialLink from "../components/SocialLink.astro";
+import TextType from "../components/TextType";
+import { Badge } from "../components/ui/badge";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const skillGroups = [
+  {
+    title: "Engineering",
+    skills: [
+      "TypeScript",
+      "Node.js",
+      "React",
+      "C#/.NET",
+      "Python",
+      "PostgreSQL",
+      "SQL Server",
+      "MongoDB",
+    ],
+  },
+  {
+    title: "Platform & Infrastructure",
+    skills: [
+      "Azure",
+      "GCP",
+      "Terraform",
+      "Kubernetes",
+      "Docker",
+      "CI/CD",
+      "Grafana",
+      "Prometheus",
+      "NGINX",
+      "Cloudflare",
+    ],
+  },
+  {
+    title: "Product & Engineering Leadership",
+    skills: [
+      "Technical Strategy",
+      "Product Shaping",
+      "System Ownership",
+      "Team Scaling",
+      "Execution",
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="Kai Sheng"
-  description="Pragmatic futurist building resilient AI-powered systems and high-velocity teams."
+  description="Pragmatic builder of systems and teams."
   showFooter={false}
 >
   <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
@@ -40,9 +82,15 @@ import SocialLink from "../components/SocialLink.astro";
     />
   </div>
 
-  <main class="flex min-h-[65svh] items-center py-16 md:min-h-[70vh] md:py-20">
-    <section class="w-full text-left">
-      <h1 class="text-[2.2rem] font-extrabold leading-[1.1] tracking-[0.5px] text-[var(--color-text)] md:text-[2.95rem]">
+  <main class="py-16 md:py-24">
+    <section class="w-full text-left" aria-labelledby="intro-heading">
+      <p class="mb-3 font-mono text-sm uppercase tracking-[0.24em] text-[var(--color-muted)]">
+        Portfolio
+      </p>
+      <h1
+        id="intro-heading"
+        class="font-extrabold leading-[0.98] tracking-[-0.06em] text-[var(--color-text)]"
+      >
         <span>// </span>
         <TextType
           client:load
@@ -57,28 +105,92 @@ import SocialLink from "../components/SocialLink.astro";
           cursorBlinkDuration={0.5}
         />
       </h1>
-      <p class="mt-6 text-[1.18rem] font-semibold leading-[1.5] text-[var(--color-text)] md:text-[1.31rem]">
-        Pragmatic builder building resilient AI-powered systems and high-velocity teams.
+      <p
+        class="mt-6 max-w-xl text-[1.28rem] font-semibold leading-[1.35] text-[var(--color-text)] md:text-[1.55rem]"
+      >
+        Pragmatic builder of systems and teams.
       </p>
-      <p class="mt-6 text-[1.05rem] leading-[1.55] font-normal text-[var(--color-muted)] md:text-[1.2rem]">
-        I enjoy building products and platforms that solve meaningful problems — and the teams that bring them to life.
-      </p>
+      <div class="text-md text-[var(--color-muted)]">
+        <p>
+          Former Director of Engineering with 10+ years of professional experience and 20+ years of
+          coding.
+        </p>
+        <p>
+          My work often sits in the phase where things start to scale — where the focus shifts from
+          building features to shaping systems, ownership, and long-term direction.
+        </p>
+        <p>
+          I've learned that speed without structure does not endure — so I take a pragmatic and
+          holistic approach, building products that solve meaningful problems, and systems and teams
+          that remain practical, maintainable, and able to evolve.
+        </p>
+        <p>
+          Outside of work, I spend time on calisthenics, rock climbing, and travelling — ways I
+          reset and keep a broader perspective.
+        </p>
+      </div>
       <p class="mt-10 text-sm leading-6 font-medium text-[var(--color-muted)]">
         Open to meaningful conversations. Hit me up!
       </p>
-      <nav class="mt-6" aria-label="Social links">
+      <nav
+        class="mt-6 flex flex-wrap items-center gap-x-2 gap-y-3"
+        aria-label="Social links and location"
+      >
         <SocialLink href="https://github.com/exglade">
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            class="h-4 w-4"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+            />
           </svg><span class="social-link__label">GitHub</span>
         </SocialLink>
         <span class="px-2 text-[var(--color-muted)]" aria-hidden="true">·</span>
         <SocialLink href="https://www.linkedin.com/in/ckaisheng">
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0zM7.069 20.452H3.163V9h3.906v11.452zM5.116 7.433a2.251 2.251 0 11.001-4.501 2.251 2.251 0 01-.001 4.501zM20.447 20.452h-3.554v-5.569c0-1.328-.027-3.036-1.849-3.036-1.849 0-2.131 1.445-2.131 2.938v5.667H9.356V9h3.414v1.561h.049c.476-.9 1.637-1.849 3.372-1.849 3.605 0 4.271 2.372 4.271 5.457v6.283z" />
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            class="h-4 w-4"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0zM7.069 20.452H3.163V9h3.906v11.452zM5.116 7.433a2.251 2.251 0 11.001-4.501 2.251 2.251 0 01-.001 4.501zM20.447 20.452h-3.554v-5.569c0-1.328-.027-3.036-1.849-3.036-1.849 0-2.131 1.445-2.131 2.938v5.667H9.356V9h3.414v1.561h.049c.476-.9 1.637-1.849 3.372-1.849 3.605 0 4.271 2.372 4.271 5.457v6.283z"
+            />
           </svg><span class="social-link__label">LinkedIn</span>
         </SocialLink>
+        <span class="px-2 text-[var(--color-muted)]" aria-hidden="true">·</span>
+        <span class="text-base font-medium text-[var(--color-text)]">Malaysia</span>
+        <span class="px-2 text-[var(--color-muted)]" aria-hidden="true">·</span>
+        <span class="text-base font-medium text-[var(--color-text)]">Remote</span>
       </nav>
+    </section>
+
+    <section class="mt-10 md:mt-12" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="">Skills</h2>
+      <div class="grid gap-5">
+        {skillGroups.map((group) => (
+          <div key={group.title}>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)]">
+              {group.title}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <Badge key={skill}>{skill}</Badge>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-10 md:mt-12" aria-labelledby="experience-heading">
+      <h2 id="experience-heading" class="">Experience</h2>
+      <div class="mt-6"><ExperienceAccordion client:load /></div>
     </section>
   </main>
 </BaseLayout>

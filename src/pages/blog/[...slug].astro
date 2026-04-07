@@ -1,6 +1,6 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => {
@@ -23,9 +23,7 @@ const { Content } = await render(post);
   <article>
     <div class="py-12 pb-6">
       <a class="mb-4 inline-block text-sm" href="/blog">&larr; Back to blog</a>
-      <h1 class="text-3xl font-bold tracking-tight text-[var(--color-text)]">
-        {post.data.title}
-      </h1>
+      <h1 class="text-3xl font-bold tracking-tight text-[var(--color-text)]">{post.data.title}</h1>
       <time class="text-sm text-[var(--color-muted)]" datetime={post.data.pubDate.toISOString()}>
         {post.data.pubDate.toLocaleDateString("en-US", {
           year: "numeric",
@@ -37,7 +35,9 @@ const { Content } = await render(post);
         <p class="mt-2 text-[var(--color-muted)]">{post.data.description}</p>
       )}
     </div>
-    <div class="pb-8 [&_blockquote]:mt-4 [&_blockquote]:border-l-[3px] [&_blockquote]:border-[var(--color-border)] [&_blockquote]:pl-4 [&_blockquote]:text-[var(--color-muted)] [&_code]:font-[var(--font-mono)] [&_code]:text-[0.9em] [&_h2]:mt-8 [&_h2]:text-[1.3rem] [&_h2]:font-semibold [&_h3]:mt-6 [&_h3]:text-[1.1rem] [&_h3]:font-semibold [&_ol]:mt-4 [&_ol]:pl-5 [&_p]:mt-4 [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-[#f5f5f5] [&_pre]:p-4 [&_pre]:font-[var(--font-mono)] [&_pre]:text-[0.9rem] [&_pre]:leading-[1.5] [&_ul]:mt-4 [&_ul]:pl-5">
+    <div
+      class="pb-8 [&_blockquote]:mt-4 [&_blockquote]:border-l-[3px] [&_blockquote]:border-[var(--site-border)] [&_blockquote]:pl-4 [&_blockquote]:text-[var(--color-muted)] [&_code]:font-[var(--font-mono)] [&_code]:text-[0.9em] [&_h2]:mt-8 [&_h2]:text-[1.3rem] [&_h2]:font-semibold [&_h3]:mt-6 [&_h3]:text-[1.1rem] [&_h3]:font-semibold [&_ol]:mt-4 [&_ol]:pl-5 [&_p]:mt-4 [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-[#f5f5f5] [&_pre]:p-4 [&_pre]:font-[var(--font-mono)] [&_pre]:text-[0.9rem] [&_pre]:leading-[1.5] [&_ul]:mt-4 [&_ul]:pl-5"
+    >
       <Content />
     </div>
   </article>

@@ -5,11 +5,7 @@ interface Props {
   showFooter?: boolean;
 }
 
-const {
-  title,
-  description = "Kai Sheng — Software Engineer",
-  showFooter = true,
-} = Astro.props;
+const { title, description = "Kai Sheng — Software Engineer", showFooter = true } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -17,26 +13,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={description}>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <!-- Canonical -->
-    <link rel="canonical" href={canonicalURL.href} />
+    <link rel="canonical" href={canonicalURL.href}>
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonicalURL.href}>
 
     <!-- Global CSS -->
     <style>
-      @import "../styles/global.css";
+    @import "../styles/global.css";
     </style>
   </head>
   <body>
