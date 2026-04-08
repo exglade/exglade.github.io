@@ -1,10 +1,6 @@
-"use client";
-
-import { gsap } from "gsap";
 import {
   createElement,
   type ElementType,
-  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -17,7 +13,6 @@ interface TextTypeProps {
   showCursor?: boolean;
   hideCursorWhileTyping?: boolean;
   cursorCharacter?: string | React.ReactNode;
-  cursorBlinkDuration?: number;
   cursorClassName?: string;
   text: string | string[];
   as?: ElementType;
@@ -26,7 +21,6 @@ interface TextTypeProps {
   pauseDuration?: number;
   deletingSpeed?: number;
   loop?: boolean;
-  textColors?: string[];
   variableSpeed?: { min: number; max: number };
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
@@ -46,8 +40,6 @@ const TextType = ({
   hideCursorWhileTyping = false,
   cursorCharacter = "|",
   cursorClassName = "",
-  cursorBlinkDuration = 0.5,
-  textColors = [],
   variableSpeed,
   onSentenceComplete,
   startOnVisible = false,
@@ -59,21 +51,9 @@ const TextType = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
-  const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
-
-  const getRandomSpeed = useCallback(() => {
-    if (!variableSpeed) return typingSpeed;
-    const { min, max } = variableSpeed;
-    return Math.random() * (max - min) + min;
-  }, [variableSpeed, typingSpeed]);
-
-  const getCurrentTextColor = () => {
-    if (textColors.length === 0) return "inherit";
-    return textColors[currentTextIndex % textColors.length];
-  };
 
   useEffect(() => {
     if (!startOnVisible || !containerRef.current) return;
@@ -92,19 +72,6 @@ const TextType = ({
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [startOnVisible]);
-
-  useEffect(() => {
-    if (showCursor && cursorRef.current) {
-      gsap.set(cursorRef.current, { opacity: 1 });
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: cursorBlinkDuration,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-      });
-    }
-  }, [showCursor, cursorBlinkDuration]);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -141,7 +108,9 @@ const TextType = ({
               setDisplayedText((prev) => prev + processedText[currentCharIndex]);
               setCurrentCharIndex((prev) => prev + 1);
             },
-            variableSpeed ? getRandomSpeed() : typingSpeed,
+            variableSpeed
+              ? Math.random() * (variableSpeed.max - variableSpeed.min) + variableSpeed.min
+              : typingSpeed,
           );
         } else if (textArray.length >= 1) {
           if (!loop && currentTextIndex === textArray.length - 1) return;
@@ -173,7 +142,6 @@ const TextType = ({
     isVisible,
     reverseMode,
     variableSpeed,
-    getRandomSpeed,
     onSentenceComplete,
   ]);
 
@@ -187,14 +155,11 @@ const TextType = ({
       className: cn("inline-block whitespace-pre-wrap tracking-tight", className),
       ...props,
     },
-    <span className="inline" style={{ color: getCurrentTextColor() || "inherit" }}>
-      {displayedText}
-    </span>,
+    <span className="inline">{displayedText}</span>,
     showCursor && (
       <span
-        ref={cursorRef}
         className={cn(
-          "ml-1 inline-block opacity-100",
+          "animate-text-type-cursor-blink ml-1 inline-block",
           shouldHideCursor && "hidden",
           cursorClassName,
         )}
