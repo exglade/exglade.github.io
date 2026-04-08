@@ -36,7 +36,7 @@ export default function ExperienceAccordion() {
         <AccordionItem
           key={experience.company}
           value={experience.company}
-          className="border-[var(--muted)]"
+          className="border-muted"
         >
           <AccordionTrigger className="border-0 bg-transparent px-4 py-2">
             <span className="grid flex-1">

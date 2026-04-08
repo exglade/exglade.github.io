@@ -47,7 +47,7 @@ export default function PageNavigation({ currentPath }: PageNavigationProps) {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative inline-flex items-center p-0 leading-none tracking-[0.08em] uppercase text-inherit no-underline after:absolute after:left-0 after:-bottom-[0.08em] after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-[220ms] after:content-[''] hover:bg-transparent hover:no-underline hover:after:scale-x-100 focus:bg-transparent visited:text-inherit",
+                    "relative inline-flex items-center p-0 leading-none tracking-[0.08em] uppercase text-inherit no-underline after:absolute after:left-0 after:-bottom-[0.08em] after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-220 after:content-[''] hover:bg-transparent hover:no-underline hover:after:scale-x-100 focus:bg-transparent visited:text-inherit",
                     isActive && "font-bold",
                   )}
                 >
