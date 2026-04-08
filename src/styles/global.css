@@ -23,10 +23,6 @@
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
     monospace;
-  --color-bg: #fafafa;
-  --color-text: #111;
-  --color-muted: #505050;
-  --color-accent: #0057b8;
   --site-border: #e5e5e5;
   --max-width: 760px;
   --background: oklch(1 0 0);
@@ -70,8 +66,6 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-text);
-  background: var(--color-bg);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   min-height: 100svh;
@@ -135,7 +129,7 @@ footer {
   padding: 2rem 0;
   text-align: center;
   font-size: 0.85rem;
-  color: var(--color-muted);
+  color: var(--muted-foreground);
   border-top: 1px solid var(--site-border);
   margin-top: 4rem;
 }

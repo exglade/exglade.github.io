@@ -58,7 +58,7 @@ export default function SkillsSection() {
         <section key={group.title} aria-labelledby={`skills-group-${group.title}`}>
           <h3
             id={`skills-group-${group.title}`}
-            className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]"
+            className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground"
           >
             {group.title}
           </h3>

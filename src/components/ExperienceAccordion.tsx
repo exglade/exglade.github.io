@@ -40,18 +40,18 @@ export default function ExperienceAccordion() {
         >
           <AccordionTrigger className="border-0 bg-transparent px-4 py-2">
             <span className="grid flex-1">
-              <span className="text-base font-semibold text-[var(--color-text)]">
+              <span className="text-base font-semibold text-foreground">
                 {experience.company}
               </span>
-              <span className="text-sm text-[var(--color-muted)]">{experience.title}</span>
+              <span className="text-sm text-muted-foreground">{experience.title}</span>
             </span>
-            <span className="mr-10 text-right text-sm font-normal text-[var(--color-muted)]">
+            <span className="mr-10 text-right text-sm font-normal text-muted-foreground">
               {experience.years}
             </span>
           </AccordionTrigger>
           <AccordionContent className="px-4 max-w-2xl text-sm">
-            <p className="text-[var(--color-muted)]">{experience.description}</p>
-            <ul className="space-y-1.5 pl-5 text-sm text-[var(--color-muted)]">
+            <p className="text-muted-foreground">{experience.description}</p>
+            <ul className="space-y-1.5 pl-5 text-sm text-muted-foreground">
               {experience.impact.map((item) => (
                 <li key={item}>{item}</li>
               ))}
