@@ -1,5 +1,6 @@
 import { Mesh, Program, Renderer, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface GrainientProps {
   timeSpeed?: number;
@@ -267,7 +268,7 @@ const Grainient = ({
   return (
     <div
       ref={containerRef}
-      className={`relative h-full w-full overflow-hidden ${className}`.trim()}
+      className={cn("relative h-full w-full overflow-hidden", className)}
     />
   );
 };

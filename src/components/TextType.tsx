@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { cn } from "@/lib/utils";
 
 interface TextTypeProps {
   className?: string;
@@ -183,7 +184,7 @@ const TextType = ({
     Component,
     {
       ref: containerRef,
-      className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
+      className: cn("inline-block whitespace-pre-wrap tracking-tight", className),
       ...props,
     },
     <span className="inline" style={{ color: getCurrentTextColor() || "inherit" }}>
@@ -192,7 +193,11 @@ const TextType = ({
     showCursor && (
       <span
         ref={cursorRef}
-        className={`ml-1 inline-block opacity-100 ${shouldHideCursor ? "hidden" : ""} ${cursorClassName}`}
+        className={cn(
+          "ml-1 inline-block opacity-100",
+          shouldHideCursor && "hidden",
+          cursorClassName,
+        )}
       >
         {cursorCharacter}
       </span>

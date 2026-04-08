@@ -51,7 +51,7 @@ export default function ExperienceAccordion() {
           </AccordionTrigger>
           <AccordionContent className="px-4 max-w-2xl text-sm">
             <p className="text-muted-foreground">{experience.description}</p>
-            <ul className="space-y-1.5 pl-5 text-sm text-muted-foreground">
+            <ul className="flex flex-col gap-1.5 pl-5 text-sm text-muted-foreground">
               {experience.impact.map((item) => (
                 <li key={item}>{item}</li>
               ))}
