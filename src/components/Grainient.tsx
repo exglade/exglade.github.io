@@ -28,6 +28,32 @@ interface GrainientProps {
   className?: string;
 }
 
+type GrainientUniforms = {
+  iTime: { value: number };
+  iResolution: { value: Float32Array };
+  uTimeSpeed: { value: number };
+  uColorBalance: { value: number };
+  uWarpStrength: { value: number };
+  uWarpFrequency: { value: number };
+  uWarpSpeed: { value: number };
+  uWarpAmplitude: { value: number };
+  uBlendAngle: { value: number };
+  uBlendSoftness: { value: number };
+  uRotationAmount: { value: number };
+  uNoiseScale: { value: number };
+  uGrainAmount: { value: number };
+  uGrainScale: { value: number };
+  uGrainAnimated: { value: number };
+  uContrast: { value: number };
+  uGamma: { value: number };
+  uSaturation: { value: number };
+  uCenterOffset: { value: Float32Array };
+  uZoom: { value: number };
+  uColor1: { value: Float32Array };
+  uColor2: { value: Float32Array };
+  uColor3: { value: Float32Array };
+};
+
 const hexToRgb = (hex: string): [number, number, number] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return [1, 1, 1];
@@ -131,6 +157,31 @@ void main(){
 }
 `;
 
+function syncUniforms(uniforms: GrainientUniforms, props: Omit<Required<GrainientProps>, "className">) {
+  uniforms.uTimeSpeed.value = props.timeSpeed;
+  uniforms.uColorBalance.value = props.colorBalance;
+  uniforms.uWarpStrength.value = props.warpStrength;
+  uniforms.uWarpFrequency.value = props.warpFrequency;
+  uniforms.uWarpSpeed.value = props.warpSpeed;
+  uniforms.uWarpAmplitude.value = props.warpAmplitude;
+  uniforms.uBlendAngle.value = props.blendAngle;
+  uniforms.uBlendSoftness.value = props.blendSoftness;
+  uniforms.uRotationAmount.value = props.rotationAmount;
+  uniforms.uNoiseScale.value = props.noiseScale;
+  uniforms.uGrainAmount.value = props.grainAmount;
+  uniforms.uGrainScale.value = props.grainScale;
+  uniforms.uGrainAnimated.value = props.grainAnimated ? 1.0 : 0.0;
+  uniforms.uContrast.value = props.contrast;
+  uniforms.uGamma.value = props.gamma;
+  uniforms.uSaturation.value = props.saturation;
+  uniforms.uCenterOffset.value[0] = props.centerX;
+  uniforms.uCenterOffset.value[1] = props.centerY;
+  uniforms.uZoom.value = props.zoom;
+  uniforms.uColor1.value.set(hexToRgb(props.color1));
+  uniforms.uColor2.value.set(hexToRgb(props.color2));
+  uniforms.uColor3.value.set(hexToRgb(props.color3));
+}
+
 const Grainient = ({
   timeSpeed = 0.25,
   colorBalance = 0.0,
@@ -157,6 +208,7 @@ const Grainient = ({
   className = "",
 }: GrainientProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const programRef = useRef<Program | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -207,6 +259,7 @@ const Grainient = ({
         uColor3: { value: new Float32Array(hexToRgb(color3)) },
       },
     });
+    programRef.current = program;
 
     const mesh = new Mesh(gl, { geometry, program });
 
@@ -225,9 +278,21 @@ const Grainient = ({
     setSize();
 
     let raf = 0;
-    const t0 = performance.now();
+    let startTime = performance.now();
+    let hiddenAt: number | null = null;
     const loop = (time: number) => {
-      (program.uniforms.iTime as { value: number }).value = (time - t0) * 0.001;
+      if (document.hidden) {
+        hiddenAt ??= time;
+        raf = requestAnimationFrame(loop);
+        return;
+      }
+
+      if (hiddenAt !== null) {
+        startTime += time - hiddenAt;
+        hiddenAt = null;
+      }
+
+      (program.uniforms.iTime as { value: number }).value = (time - startTime) * 0.001;
       renderer.render({ scene: mesh });
       raf = requestAnimationFrame(loop);
     };
@@ -236,10 +301,41 @@ const Grainient = ({
     return () => {
       cancelAnimationFrame(raf);
       resizeObserver.disconnect();
+      programRef.current = null;
       if (canvas.parentElement === container) {
         container.removeChild(canvas);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const program = programRef.current;
+    if (!program) return;
+
+    syncUniforms(program.uniforms as GrainientUniforms, {
+      timeSpeed,
+      colorBalance,
+      warpStrength,
+      warpFrequency,
+      warpSpeed,
+      warpAmplitude,
+      blendAngle,
+      blendSoftness,
+      rotationAmount,
+      noiseScale,
+      grainAmount,
+      grainScale,
+      grainAnimated,
+      contrast,
+      gamma,
+      saturation,
+      centerX,
+      centerY,
+      zoom,
+      color1,
+      color2,
+      color3,
+    });
   }, [
     timeSpeed,
     colorBalance,
