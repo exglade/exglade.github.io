@@ -12,12 +12,11 @@
       "package.json",
       "tsconfig.json",
       "src/**/*",
-      "!src/next-app",
       "!src/content/**/*.md",
-      "!!dist",
-      "!!.astro",
-      "!!node_modules",
-      "!!package-lock.json"
+      "!dist",
+      "!.astro",
+      "!node_modules",
+      "!package-lock.json"
     ],
     "ignoreUnknown": true
   },
