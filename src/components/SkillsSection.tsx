@@ -59,7 +59,7 @@ const slugify = (value: string) =>
 
 export default function SkillsSection() {
   return (
-    <div className="grid gap-7 p-4">
+    <div className="grid gap-10 p-4">
       {skillGroups.map((group) => {
         const headingId = `skills-group-${slugify(group.title)}`;
 
@@ -67,7 +67,7 @@ export default function SkillsSection() {
           <section key={group.title} aria-labelledby={headingId} className="flex flex-col gap-2">
             <h3
               id={headingId}
-              className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground"
+              className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-600"
             >
               {group.title}
             </h3>

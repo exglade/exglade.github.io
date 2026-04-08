@@ -6,13 +6,13 @@ const experiences = [
     title: "Director of Engineering",
     years: "2019 - 2025",
     description:
-      "HealthMetrics was a leading digital healthcare TPA platform in South East Asia that enabled corporates and insurers to manage employee healthcare benefits with real-time data and automation.",
+      "HealthMetrics is a digital healthcare TPA platform that helps corporates and insurers manage employee healthcare benefits, claims, and provider networks with real-time data and automation.",
     impact: [
       "Led engineering across product and platform, working closely with product leadership on roadmap and solution design.",
       "Built and evolved the HealthMetrics system end-to-end, including platform infrastructure, developer tooling, and engineering workflows.",
       "Scaled engineering to 20+ engineers, establishing clearer ownership, team structure, and delivery processes.",
       "Drove continuous improvements across the system over time, resulting in 2–3× performance gains, ~54% cost reduction, and sustained 99.97% uptime.",
-      "Led engineering scope for ISO 27001, achieving zero non-conformities.",
+      "Led engineering scope for ISO 27001, with zero non-conformities.",
     ],
   },
   {
@@ -37,16 +37,16 @@ export default function ExperienceAccordion() {
           <AccordionTrigger className="border-0 bg-transparent p-4">
             <span className="flex flex-1 flex-col gap-0">
               <span className="text-base font-semibold text-foreground">{experience.company}</span>
-              <span className="text-sm text-muted-foreground">{experience.title}</span>
+              <span className="text-sm text-neutral-600">{experience.title}</span>
             </span>
-            <span className="mr-10 text-right text-sm font-normal text-muted-foreground">
+            <span className="mr-10 text-right text-sm font-normal text-neutral-600">
               {experience.years}
             </span>
           </AccordionTrigger>
           <AccordionContent className="px-4 max-w-2xl text-sm">
             <div className="flex flex-col">
-              <p className="text-muted-foreground">{experience.description}</p>
-              <ul className="flex list-disc flex-col gap-2 pl-5 text-sm text-muted-foreground">
+              <p className="text-neutral-600">{experience.description}</p>
+              <ul className="flex list-disc flex-col gap-2 pl-5 text-sm text-neutral-600">
                 {experience.impact.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

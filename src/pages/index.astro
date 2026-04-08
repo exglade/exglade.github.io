@@ -11,7 +11,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Kai Sheng"
-  description="Pragmatic builder of systems and teams. I like to take a pragmatic and holistic approach, building products that solve meaningful problems, and systems and teams that remain practical, maintainable, and able to evolve."
+  description="Building systems that scale. Teams that last. I like to take a pragmatic and holistic approach, building products that solve meaningful problems, and systems and teams that remain practical, maintainable, and able to evolve."
   showFooter={false}
 >
   <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
@@ -51,9 +51,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <section aria-labelledby="intro-heading">
           <h1
             id="intro-heading"
-            class="font-extrabold leading-[0.98] tracking-[-0.06em] text-foreground"
+            class="font-extrabold tracking-tight leading-tight"
           >
-            <span class="inline-block">// </span>
+            <span class="inline-block">//&nbsp;</span>
             <TextType
               client:load
               as="span"
@@ -68,13 +68,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </h1>
         </section>
 
-        <section class="flex flex-col gap-3" aria-labelledby="about-heading">
+        <section class="flex flex-col gap-8" aria-labelledby="about-heading">
           <h2 id="about-heading" class="sr-only">About</h2>
-          <h3>Pragmatic builder of systems and teams.</h3>
-          <div class="flex flex-col gap-4 text-sm text-muted-foreground">
+          <h3 class="text-xl md:text-2xl font-medium leading-snug">Building systems that scale. Teams that last.</h3>
+          <div class="flex flex-col gap-4 text-sm md:text-base text-neutral-600 leading-relaxed">
             <p>
-              Former Director of Engineering with 10+ years of professional experience and 20+ years
-              of coding.
+              Former Director of Engineering with 10+ years of experience, and over 20 years of coding.
             </p>
             <p>
               My work often sits in the phase where things start to scale, where the focus shifts
@@ -95,7 +94,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <section class="flex flex-col gap-3" aria-labelledby="contact-heading">
         <h2 id="contact-heading" class="sr-only">Contact</h2>
-        <p class="text-sm font-medium">Open to meaningful conversations.</p>
+        <p class="text-sm md:text-base font-medium">Open to meaningful conversations — Let's connect.</p>
         <div
           class="flex flex-wrap items-center gap-x-2 gap-y-3"
           aria-label="Social links and location"
@@ -131,13 +130,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </section>
     </section>
 
-    <section class="mt-12" aria-labelledby="experience-heading">
-      <h2 id="experience-heading" class="mb-4 text-2xl">Experience</h2>
+    <section class="mt-16 md:mt-20" aria-labelledby="experience-heading">
+      <h2 id="experience-heading" class="mb-4 text-lg md:text-xl font-semibold tracking-tight">Experience</h2>
       <ExperienceAccordion client:load />
     </section>
 
-    <section class="mt-12" aria-labelledby="skills-heading">
-      <h2 id="skills-heading" class="mb-4 text-2xl">Skills</h2>
+    <section class="mt-16 md:mt-20" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="mb-4 text-lg md:text-xl font-semibold tracking-tight">Skills</h2>
       <SkillsSection />
     </section>
   </main>
