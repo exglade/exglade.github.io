@@ -51,38 +51,48 @@ const skillGroups: SkillGroup[] = [
   },
 ];
 
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
 export default function SkillsSection() {
   return (
     <div className="grid gap-5">
-      {skillGroups.map((group) => (
-        <section key={group.title} aria-labelledby={`skills-group-${group.title}`}>
-          <h3
-            id={`skills-group-${group.title}`}
-            className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground"
-          >
-            {group.title}
-          </h3>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {group.skills.map((skill) =>
-              skill.href ? (
-                <Badge key={skill.label} asChild>
-                  <a
-                    href={skill.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${skill.label} official website`}
-                    className="no-underline hover:no-underline"
-                  >
-                    {skill.label}
-                  </a>
-                </Badge>
-              ) : (
-                <Badge key={skill.label}>{skill.label}</Badge>
-              ),
-            )}
-          </div>
-        </section>
-      ))}
+      {skillGroups.map((group) => {
+        const headingId = `skills-group-${slugify(group.title)}`;
+
+        return (
+          <section key={group.title} aria-labelledby={headingId}>
+            <h3
+              id={headingId}
+              className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground"
+            >
+              {group.title}
+            </h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {group.skills.map((skill) =>
+                skill.href ? (
+                  <Badge key={skill.label} asChild>
+                    <a
+                      href={skill.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${skill.label} official website`}
+                      className="no-underline hover:no-underline"
+                    >
+                      {skill.label}
+                    </a>
+                  </Badge>
+                ) : (
+                  <Badge key={skill.label}>{skill.label}</Badge>
+                ),
+              )}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }
