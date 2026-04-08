@@ -1,12 +1,6 @@
-import {
-  createElement,
-  type ElementType,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { createElement, type ElementType, useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import styles from "./TextType.module.css";
 
 interface TextTypeProps {
   className?: string;
@@ -159,7 +153,8 @@ const TextType = ({
     showCursor && (
       <span
         className={cn(
-          "animate-text-type-cursor-blink ml-1 inline-block",
+          "ml-1 inline-block",
+          styles.cursor,
           shouldHideCursor && "hidden",
           cursorClassName,
         )}

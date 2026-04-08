@@ -157,7 +157,10 @@ void main(){
 }
 `;
 
-function syncUniforms(uniforms: GrainientUniforms, props: Omit<Required<GrainientProps>, "className">) {
+function syncUniforms(
+  uniforms: GrainientUniforms,
+  props: Omit<Required<GrainientProps>, "className">,
+) {
   uniforms.uTimeSpeed.value = props.timeSpeed;
   uniforms.uColorBalance.value = props.colorBalance;
   uniforms.uWarpStrength.value = props.warpStrength;
@@ -362,10 +365,7 @@ const Grainient = ({
   ]);
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("relative h-full w-full overflow-hidden", className)}
-    />
+    <div ref={containerRef} className={cn("relative h-full w-full overflow-hidden", className)} />
   );
 };
 

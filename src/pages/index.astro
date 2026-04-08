@@ -1,4 +1,5 @@
 ---
+import { Separator } from "@/components/ui/separator";
 import ExperienceAccordion from "../components/ExperienceAccordion";
 import Grainient from "../components/Grainient";
 import PageNavigation from "../components/PageNavigation";
@@ -10,7 +11,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Kai Sheng"
-  description="Pragmatic builder of systems and teams."
+  description="Pragmatic builder of systems and teams. I like to take a pragmatic and holistic approach, building products that solve meaningful problems, and systems and teams that remain practical, maintainable, and able to evolve."
   showFooter={false}
 >
   <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
@@ -42,61 +43,59 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     />
   </div>
 
-  <main class="mx-auto w-full max-w-xl py-16 md:py-24">
-    <section class="w-full text-left">
-      <nav aria-label="Page navigation"><PageNavigation currentPath={Astro.url.pathname} /></nav>
+  <main class="mx-auto w-full max-w-xl py-14 md:py-24">
+    <section class="flex w-full flex-col gap-10 text-left">
+      <div class="flex flex-col gap-8">
+        <nav aria-label="Page navigation"><PageNavigation currentPath={Astro.url.pathname} /></nav>
 
-      <section aria-labelledby="intro-heading">
-        <h1
-          id="intro-heading"
-          class="font-extrabold leading-[0.98] tracking-[-0.06em] text-foreground"
-        >
-          <span class="inline-block">// </span>
-          <TextType
-            client:load
-            as="span"
-            text={["KAI SHENG", "凯升", "Kai", "カイ", "카이"]}
-            typingSpeed={75}
-            pauseDuration={3000}
-            showCursor
-            cursorCharacter="|"
-            deletingSpeed={30}
-            variableSpeed={{ min: 60, max: 120 }}
-          />
-        </h1>
-      </section>
+        <section aria-labelledby="intro-heading">
+          <h1
+            id="intro-heading"
+            class="font-extrabold leading-[0.98] tracking-[-0.06em] text-foreground"
+          >
+            <span class="inline-block">// </span>
+            <TextType
+              client:load
+              as="span"
+              text={["KAI SHENG", "凯升", "Kai", "カイ", "카이"]}
+              typingSpeed={75}
+              pauseDuration={3000}
+              showCursor
+              cursorCharacter="|"
+              deletingSpeed={30}
+              variableSpeed={{ min: 60, max: 120 }}
+            />
+          </h1>
+        </section>
 
-      <section class="mt-6" aria-labelledby="bio-heading">
-        <h2 id="bio-heading" class="sr-only">Bio</h2>
-        <p class="max-w-xl text-lg font-semibold text-foreground">
-          Pragmatic builder of systems and teams.
-        </p>
-        <div class="text-sm text-muted-foreground">
-          <p>
-            Former Director of Engineering with 10+ years of professional experience and 20+ years
-            of coding.
-          </p>
-          <p>
-            My work often sits in the phase where things start to scale, where the focus shifts
-            from building features to shaping systems, ownership, and long-term direction.
-          </p>
-          <p>
-            Speed without structure does not endure. So, I take a pragmatic and
-            holistic approach, building products that solve meaningful problems, and systems and
-            teams that remain practical, maintainable, and able to evolve.
-          </p>
-          <p>
-            Outside of work, I spend time on calisthenics, rock climbing, and travelling. It helps me
-            reset and keep a broader perspective.
-          </p>
-        </div>
-      </section>
+        <section class="flex flex-col gap-3" aria-labelledby="about-heading">
+          <h2 id="about-heading" class="sr-only">About</h2>
+          <h3>Pragmatic builder of systems and teams.</h3>
+          <div class="flex flex-col gap-4 text-sm text-muted-foreground">
+            <p>
+              Former Director of Engineering with 10+ years of professional experience and 20+ years
+              of coding.
+            </p>
+            <p>
+              My work often sits in the phase where things start to scale, where the focus shifts
+              from building features to shaping systems, ownership, and long-term direction.
+            </p>
+            <p>
+              Speed without structure does not endure. So, I like to take a pragmatic and holistic
+              approach, building products that solve meaningful problems, and systems and teams that
+              remain practical, maintainable, and able to evolve.
+            </p>
+            <p>
+              Outside of work, I spend time on calisthenics, rock climbing, and travelling. It helps
+              me reset and keep a broader perspective.
+            </p>
+          </div>
+        </section>
+      </div>
 
-      <section class="mt-10" aria-labelledby="contact-heading">
+      <section class="flex flex-col gap-3" aria-labelledby="contact-heading">
         <h2 id="contact-heading" class="sr-only">Contact</h2>
-        <p class="text-xs font-medium text-muted-foreground">
-          Open to meaningful conversations.
-        </p>
+        <p class="text-sm font-medium">Open to meaningful conversations.</p>
         <div
           class="flex flex-wrap items-center gap-x-2 gap-y-3"
           aria-label="Social links and location"
@@ -132,13 +131,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </section>
     </section>
 
-    <section class="mt-10 md:mt-12" aria-labelledby="experience-heading">
-      <h2 id="experience-heading">Experience</h2>
+    <section class="mt-12" aria-labelledby="experience-heading">
+      <h2 id="experience-heading" class="mb-4 text-2xl">Experience</h2>
       <ExperienceAccordion client:load />
     </section>
 
-    <section class="mt-10 md:mt-12" aria-labelledby="skills-heading">
-      <h2 id="skills-heading">Skills</h2>
+    <section class="mt-12" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="mb-4 text-2xl">Skills</h2>
       <SkillsSection />
     </section>
   </main>

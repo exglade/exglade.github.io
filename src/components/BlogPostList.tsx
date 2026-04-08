@@ -33,9 +33,7 @@ export default function BlogPostList({ posts }: BlogPostListProps) {
               })}
             </time>
             {post.data.description ? (
-              <p className="mt-1 text-[0.95rem] text-muted-foreground">
-                {post.data.description}
-              </p>
+              <p className="mt-1 text-[0.95rem] text-muted-foreground">{post.data.description}</p>
             ) : null}
           </a>
         </li>

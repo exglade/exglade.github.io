@@ -33,16 +33,10 @@ export default function ExperienceAccordion() {
   return (
     <Accordion type="single" collapsible>
       {experiences.map((experience) => (
-        <AccordionItem
-          key={experience.company}
-          value={experience.company}
-          className="border-muted"
-        >
-          <AccordionTrigger className="border-0 bg-transparent px-4 py-2">
-            <span className="grid flex-1">
-              <span className="text-base font-semibold text-foreground">
-                {experience.company}
-              </span>
+        <AccordionItem key={experience.company} value={experience.company} className="border-muted">
+          <AccordionTrigger className="border-0 bg-transparent p-4">
+            <span className="flex flex-1 flex-col gap-0">
+              <span className="text-base font-semibold text-foreground">{experience.company}</span>
               <span className="text-sm text-muted-foreground">{experience.title}</span>
             </span>
             <span className="mr-10 text-right text-sm font-normal text-muted-foreground">
@@ -50,12 +44,14 @@ export default function ExperienceAccordion() {
             </span>
           </AccordionTrigger>
           <AccordionContent className="px-4 max-w-2xl text-sm">
-            <p className="text-muted-foreground">{experience.description}</p>
-            <ul className="flex list-disc flex-col gap-1.5 pl-5 text-sm text-muted-foreground">
-              {experience.impact.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <div className="flex flex-col">
+              <p className="text-muted-foreground">{experience.description}</p>
+              <ul className="flex list-disc flex-col gap-2 pl-5 text-sm text-muted-foreground">
+                {experience.impact.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </AccordionContent>
         </AccordionItem>
       ))}

@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title: string;
   description?: string;
@@ -29,17 +31,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:url" content={canonicalURL.href}>
-
-    <!-- Global CSS -->
-    <style>
-    @import "../styles/global.css";
-    </style>
   </head>
   <body>
     <div class="mx-auto max-w-(--max-width) px-4 md:px-6">
       <slot />
       {showFooter && (
-        <footer class="site-footer">
+        <footer class="mt-16 border-t border-border py-8 text-center text-[0.85rem] text-muted-foreground">
           &copy; {new Date().getFullYear()} Kai Sheng
         </footer>
       )}

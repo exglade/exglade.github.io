@@ -1,0 +1,13 @@
+.cursor {
+  animation: cursor-blink 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes cursor-blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
