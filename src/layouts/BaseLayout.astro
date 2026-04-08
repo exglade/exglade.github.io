@@ -36,10 +36,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="mx-auto max-w-[var(--max-width)] px-4 md:px-6">
       <slot />
       {showFooter && (
-        <footer>
+        <footer class="site-footer">
           &copy; {new Date().getFullYear()} Kai Sheng
         </footer>
       )}
