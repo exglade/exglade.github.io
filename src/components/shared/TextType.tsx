@@ -48,6 +48,8 @@ const TextType = ({
   const containerRef = useRef<HTMLElement>(null);
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
+  const variableSpeedMin = variableSpeed?.min;
+  const variableSpeedMax = variableSpeed?.max;
 
   useEffect(() => {
     if (!startOnVisible || !containerRef.current) return;
@@ -102,8 +104,8 @@ const TextType = ({
               setDisplayedText((prev) => prev + processedText[currentCharIndex]);
               setCurrentCharIndex((prev) => prev + 1);
             },
-            variableSpeed
-              ? Math.random() * (variableSpeed.max - variableSpeed.min) + variableSpeed.min
+            variableSpeedMin !== undefined && variableSpeedMax !== undefined
+              ? Math.random() * (variableSpeedMax - variableSpeedMin) + variableSpeedMin
               : typingSpeed,
           );
         } else if (textArray.length >= 1) {
@@ -135,7 +137,8 @@ const TextType = ({
     initialDelay,
     isVisible,
     reverseMode,
-    variableSpeed,
+    variableSpeedMin,
+    variableSpeedMax,
     onSentenceComplete,
   ]);
 
