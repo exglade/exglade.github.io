@@ -1,14 +1,14 @@
 ---
+import ExperienceAccordion from "@/components/home/ExperienceAccordion";
+import SkillsSection from "@/components/home/SkillsSection";
+import Grainient from "@/components/shared/Grainient";
+import TextType from "@/components/shared/TextType";
+import LanguageSwitcher from "@/components/site/LanguageSwitcher";
+import PageNavigation from "@/components/site/PageNavigation";
+import SocialLink from "@/components/site/SocialLink.astro";
+import ThemeSwitcher from "@/components/site/ThemeSwitcher";
 import { type HomeContent, localeLinks } from "@/data/home";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Grainient from "../shared/Grainient";
-import TextType from "../shared/TextType";
-import LanguageSwitcher from "../site/LanguageSwitcher";
-import PageNavigation from "../site/PageNavigation";
-import SocialLink from "../site/SocialLink.astro";
-import ThemeSwitcher from "../site/ThemeSwitcher";
-import ExperienceAccordion from "./ExperienceAccordion";
-import SkillsSection from "./SkillsSection";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 type Props = {
   content: HomeContent;
