@@ -213,6 +213,7 @@ const Grainient = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const programRef = useRef<Program | null>(null);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Init-only effect; prop changes are handled by the sync effect below.
   useEffect(() => {
     if (!containerRef.current) return;
 

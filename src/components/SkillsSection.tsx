@@ -41,7 +41,7 @@ export default function SkillsSection({ skillGroups }: SkillsSectionProps) {
                     <a
                       href={skill.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label={`${skill.label} official website`}
                       className="no-underline hover:no-underline"
                     >

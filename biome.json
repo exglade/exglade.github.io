@@ -80,7 +80,12 @@
         "enabled": true
       },
       "linter": {
-        "enabled": true
+        "enabled": true,
+        "rules": {
+          "correctness": {
+            "useJsxKeyInIterable": "off"
+          }
+        }
       }
     },
     {
