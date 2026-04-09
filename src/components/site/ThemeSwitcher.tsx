@@ -85,7 +85,7 @@ export default function ThemeSwitcher() {
           >
             <Icon
               aria-hidden="true"
-              className="size-3.5 transition-transform duration-200 group-hover:rotate-12 group-active:rotate-180"
+              className="size-5 transition-transform duration-200 group-hover:rotate-12 group-active:rotate-180"
             />
           </button>
         </TooltipTrigger>
