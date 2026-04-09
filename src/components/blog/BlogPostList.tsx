@@ -33,7 +33,7 @@ export default function BlogPostList({ groups }: BlogPostListProps) {
                     {formatIsoDate(post.data.pubDate)}
                   </time>
                   <span className="text-lg font-medium text-foreground">
-                    <span className="relative inline-block after:absolute after:left-0 after:-bottom-[0.08em] after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-220 after:content-[''] group-hover:after:scale-x-100 group-focus-visible:after:scale-x-100">
+                    <span className="link-underline group-hover:after:scale-x-100 group-focus-visible:after:scale-x-100">
                       {post.data.title}
                     </span>
                   </span>
