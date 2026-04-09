@@ -101,7 +101,7 @@ body {
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --blog-background-glow: oklch(0.36 0.08 230 / 28%);
+  --blog-background-glow: oklch(0.324 0.0535 277.18 / 100%);
 }
 
 @layer base {
