@@ -29,6 +29,7 @@ const tags = getBlogPostTags(post);
 <BlogLayout
   title={`${post.data.title} | Kai Sheng`}
   description={post.data.description || post.data.title}
+  noIndex={post.data.draft === true}
 >
   <article>
     <header class="max-w-2xl py-8 md:py-12">

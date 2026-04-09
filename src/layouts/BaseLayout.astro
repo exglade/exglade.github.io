@@ -6,6 +6,7 @@ interface Props {
   description?: string;
   lang?: string;
   canonicalPath?: string;
+  noIndex?: boolean;
   alternates?: {
     href: string;
     lang: string;
@@ -17,6 +18,7 @@ const {
   description = "Kai Sheng — Software Engineer",
   lang = "en",
   canonicalPath,
+  noIndex = false,
   alternates = [],
 } = Astro.props;
 
@@ -51,6 +53,7 @@ const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
     <meta name="color-scheme" content="light dark">
     <title>{title}</title>
     <meta name="description" content={description}>
+    {noIndex && <meta name="robots" content="noindex" />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">

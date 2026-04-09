@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getBlogPostUrl, getPublishedBlogPosts } from "../lib/blog";
+import { getBlogPostTags, getBlogPostUrl, getPublishedBlogPosts } from "../lib/blog";
 
 const escapeXml = (value: string) =>
   value
@@ -12,19 +12,32 @@ const escapeXml = (value: string) =>
 export const GET: APIRoute = async ({ site }) => {
   const siteUrl = site ?? new URL("https://kaisheng.dev");
   const posts = await getPublishedBlogPosts();
-  const latestPost = posts[0];
+  const latestPost = posts.reduce<(typeof posts)[number] | undefined>((latest, post) => {
+    if (!latest) {
+      return post;
+    }
+
+    const latestDate = latest.data.updatedDate ?? latest.data.pubDate;
+    const postDate = post.data.updatedDate ?? post.data.pubDate;
+
+    return postDate.valueOf() > latestDate.valueOf() ? post : latest;
+  }, undefined);
 
   const items = posts
     .map((post) => {
       const postUrl = new URL(getBlogPostUrl(post), siteUrl).href;
       const description = post.data.description ?? post.data.title;
+      const categories = getBlogPostTags(post)
+        .map((tag) => `  <category>${escapeXml(tag.label)}</category>`)
+        .join("\n");
+      const categoryBlock = categories ? `${categories}\n` : "";
 
       return `<item>
   <title>${escapeXml(post.data.title)}</title>
   <link>${escapeXml(postUrl)}</link>
   <guid>${escapeXml(postUrl)}</guid>
   <pubDate>${post.data.pubDate.toUTCString()}</pubDate>
-  <description>${escapeXml(description)}</description>
+${categoryBlock}  <description>${escapeXml(description)}</description>
 </item>`;
     })
     .join("\n");
@@ -37,7 +50,7 @@ export const GET: APIRoute = async ({ site }) => {
   <description>Blog posts by Kai Sheng</description>
   <language>en</language>
   <atom:link href="${escapeXml(new URL("/rss.xml", siteUrl).href)}" rel="self" type="application/rss+xml" />
-  ${latestPost ? `<lastBuildDate>${latestPost.data.pubDate.toUTCString()}</lastBuildDate>` : ""}
+  ${latestPost ? `<lastBuildDate>${(latestPost.data.updatedDate ?? latestPost.data.pubDate).toUTCString()}</lastBuildDate>` : ""}
 ${items}
 </channel>
 </rss>`;
