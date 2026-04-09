@@ -2,14 +2,16 @@
 import BlogFooter from "@/components/blog/BlogFooter.astro";
 import PageNavigation from "@/components/site/PageNavigation";
 import ThemeSwitcher from "@/components/site/ThemeSwitcher";
+import { type HomeContent, homeContentByLocale } from "@/data/home";
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = {
   title: string;
   description: string;
+  navLabels?: HomeContent["nav"];
 };
 
-const { title, description } = Astro.props;
+const { title, description, navLabels = homeContentByLocale.en.nav } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -23,8 +25,8 @@ const { title, description } = Astro.props;
       <PageNavigation
         activeItemKey="blog"
         navItems={[
-          { key: "portfolio", label: "Portfolio", href: "/", visible: true },
-          { key: "blog", label: "Blog", href: "/blog", visible: true },
+          { key: "portfolio", label: navLabels.portfolio, href: "/", visible: true },
+          { key: "blog", label: navLabels.blog, href: "/blog", visible: true },
         ]}
       />
       <ThemeSwitcher client:load />
