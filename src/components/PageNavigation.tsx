@@ -9,36 +9,25 @@ import {
 import { Separator } from "./ui/separator";
 
 type PageNavigationProps = {
-  currentPath: string;
+  navItems: NavItem[];
+  activeItemKey: NavItem["key"];
 };
 
 type NavItem = {
+  key: "portfolio" | "blog";
   href: string;
   label: string;
   visible: boolean;
 };
 
-const navItems: NavItem[] = [
-  { label: "Portfolio", href: "/", visible: true },
-  { label: "Blog", href: "/blog", visible: false },
-];
-
-function isActivePath(currentPath: string, href: string) {
-  if (href === "/") {
-    return currentPath === "/";
-  }
-
-  return currentPath === href || currentPath.startsWith(`${href}/`);
-}
-
-export default function PageNavigation({ currentPath }: PageNavigationProps) {
+export default function PageNavigation({ navItems, activeItemKey }: PageNavigationProps) {
   const visibleItems = navItems.filter((item) => item.visible);
 
   return (
     <NavigationMenu viewport={false} className="w-fit justify-start">
       <NavigationMenuList className="m-0 flex w-fit items-center justify-start p-0">
         {visibleItems.map((item, index) => {
-          const isActive = isActivePath(currentPath, item.href);
+          const isActive = item.key === activeItemKey;
 
           return (
             <Fragment key={item.href}>

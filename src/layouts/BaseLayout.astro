@@ -5,15 +5,28 @@ interface Props {
   title: string;
   description?: string;
   showFooter?: boolean;
+  lang?: string;
+  canonicalPath?: string;
+  alternates?: {
+    href: string;
+    lang: string;
+  }[];
 }
 
-const { title, description = "Kai Sheng — Software Engineer", showFooter = true } = Astro.props;
+const {
+  title,
+  description = "Kai Sheng — Software Engineer",
+  showFooter = true,
+  lang = "en",
+  canonicalPath,
+  alternates = [],
+} = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +38,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL.href}>
+    {alternates.map((alternate) => (
+      <link
+        rel="alternate"
+        hreflang={alternate.lang}
+        href={new URL(alternate.href, Astro.site).href}
+      />
+    ))}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL("/", Astro.site).href}
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">

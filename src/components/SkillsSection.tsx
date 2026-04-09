@@ -10,46 +10,9 @@ type SkillGroup = {
   skills: Skill[];
 };
 
-const skillGroups: SkillGroup[] = [
-  {
-    title: "Engineering",
-    skills: [
-      { label: "TypeScript", href: "https://www.typescriptlang.org/" },
-      { label: "Node.js", href: "https://nodejs.org/" },
-      { label: "React", href: "https://react.dev/" },
-      { label: "C#/.NET", href: "https://dotnet.microsoft.com/" },
-      { label: "Python", href: "https://www.python.org/" },
-      { label: "PostgreSQL", href: "https://www.postgresql.org/" },
-      { label: "SQL Server", href: "https://www.microsoft.com/sql-server" },
-      { label: "MongoDB", href: "https://www.mongodb.com/" },
-    ],
-  },
-  {
-    title: "Platform & Infrastructure",
-    skills: [
-      { label: "Azure", href: "https://azure.microsoft.com/" },
-      { label: "GCP", href: "https://cloud.google.com/" },
-      { label: "Terraform", href: "https://developer.hashicorp.com/terraform" },
-      { label: "Kubernetes", href: "https://kubernetes.io/" },
-      { label: "Docker", href: "https://www.docker.com/" },
-      { label: "CI/CD" },
-      { label: "Grafana", href: "https://grafana.com/" },
-      { label: "Prometheus", href: "https://prometheus.io/" },
-      { label: "NGINX", href: "https://nginx.org/" },
-      { label: "Cloudflare", href: "https://www.cloudflare.com/" },
-    ],
-  },
-  {
-    title: "Product & Engineering Leadership",
-    skills: [
-      { label: "Technical Strategy" },
-      { label: "Product Shaping" },
-      { label: "System Ownership" },
-      { label: "Team Scaling" },
-      { label: "Execution" },
-    ],
-  },
-];
+type SkillsSectionProps = {
+  skillGroups: SkillGroup[];
+};
 
 const slugify = (value: string) =>
   value
@@ -57,11 +20,11 @@ const slugify = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-export default function SkillsSection() {
+export default function SkillsSection({ skillGroups }: SkillsSectionProps) {
   return (
     <div className="grid gap-10 p-4">
-      {skillGroups.map((group) => {
-        const headingId = `skills-group-${slugify(group.title)}`;
+      {skillGroups.map((group, index) => {
+        const headingId = `skills-group-${slugify(group.title) || index}`;
 
         return (
           <section key={group.title} aria-labelledby={headingId} className="flex flex-col gap-2">
