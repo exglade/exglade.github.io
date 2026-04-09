@@ -11,7 +11,7 @@ const experiences = [
       "Led engineering across product and platform, working closely with product leadership on roadmap and solution design.",
       "Built and evolved the HealthMetrics system end-to-end, including platform infrastructure, developer tooling, and engineering workflows.",
       "Scaled engineering to 20+ engineers, establishing clearer ownership, team structure, and delivery processes.",
-      "Drove continuous improvements across the system over time, resulting in 2–3× performance gains, ~54% cost reduction, and sustained 99.97% uptime.",
+      "Drove continuous improvements across the system over time, resulting in 3× performance gains, ~54% cost reduction, and sustained 99.97% uptime.",
       "Led engineering scope for ISO 27001, with zero non-conformities.",
     ],
   },
