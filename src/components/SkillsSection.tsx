@@ -30,7 +30,7 @@ export default function SkillsSection({ skillGroups }: SkillsSectionProps) {
           <section key={group.title} aria-labelledby={headingId} className="flex flex-col gap-2">
             <h3
               id={headingId}
-              className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-600"
+              className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground"
             >
               {group.title}
             </h3>

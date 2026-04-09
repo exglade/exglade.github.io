@@ -28,8 +28,29 @@ const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 <!doctype html>
 <html lang={lang}>
   <head>
+    <script is:inline>
+    (() => {
+      const storageKey = "theme";
+      const root = document.documentElement;
+      const storedPreference = window.localStorage.getItem(storageKey);
+      const preference =
+        storedPreference === "light" || storedPreference === "dark" || storedPreference === "system"
+          ? storedPreference
+          : "system";
+      const resolvedTheme =
+        preference === "system"
+          ? window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
+          : preference;
+
+      root.dataset.theme = preference;
+      root.classList.toggle("dark", resolvedTheme === "dark");
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>{title}</title>
     <meta name="description" content={description}>
 

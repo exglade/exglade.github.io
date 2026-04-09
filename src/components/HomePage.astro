@@ -8,6 +8,7 @@ import PageNavigation from "./PageNavigation";
 import SkillsSection from "./SkillsSection";
 import SocialLink from "./SocialLink.astro";
 import TextType from "./TextType";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 type Props = {
   content: HomeContent;
@@ -28,9 +29,18 @@ const { content } = Astro.props;
     <Grainient
       client:load
       className="h-full w-full"
-      color1="#dadada"
-      color2="#ffc7b8"
-      color3="#edf6f9"
+      palettes={{
+        light: {
+          color1: "#dadada",
+          color2: "#ffc7b8",
+          color3: "#edf6f9",
+        },
+        dark: {
+          color1: "#090b14",
+          color2: "#2d314f", //"#2d314f",
+          color3: "#090b14",
+        },
+      }}
       timeSpeed={1}
       colorBalance={0}
       warpStrength={1}
@@ -64,7 +74,14 @@ const { content } = Astro.props;
               { key: "blog", label: content.nav.blog, href: "/blog", visible: false },
             ]}
           />
-          <LanguageSwitcher client:load currentLocale={content.locale} localeLinks={localeLinks} />
+          <div class="flex items-center gap-1">
+            <LanguageSwitcher
+              client:load
+              currentLocale={content.locale}
+              localeLinks={localeLinks}
+            />
+            <ThemeSwitcher client:load />
+          </div>
         </div>
 
         <section aria-labelledby="intro-heading">
@@ -87,7 +104,9 @@ const { content } = Astro.props;
         <section class="flex flex-col gap-8" aria-labelledby="about-heading">
           <h2 id="about-heading" class="sr-only">{content.intro.aboutLabel}</h2>
           <h3 class="text-xl md:text-2xl font-medium leading-snug">{content.intro.headline}</h3>
-          <div class="flex flex-col gap-4 text-sm md:text-base text-neutral-600 leading-relaxed">
+          <div
+            class="flex flex-col gap-4 text-sm text-muted-foreground leading-relaxed md:text-base"
+          >
             {content.intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </section>

@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import ThemeSwitcher from "../../components/ThemeSwitcher";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
@@ -22,7 +23,10 @@ const { Content } = await render(post);
 >
   <article>
     <div class="py-12 pb-6">
-      <a class="mb-4 inline-block text-sm" href="/blog">&larr; Back to blog</a>
+      <div class="mb-4 flex items-start justify-between gap-4">
+        <a class="inline-block text-sm" href="/blog">&larr; Back to blog</a>
+        <ThemeSwitcher client:load />
+      </div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">{post.data.title}</h1>
       <time class="text-sm text-muted-foreground" datetime={post.data.pubDate.toISOString()}>
         {post.data.pubDate.toLocaleDateString("en-US", {
@@ -36,7 +40,7 @@ const { Content } = await render(post);
       )}
     </div>
     <div
-      class="prose prose-neutral max-w-none pb-8 prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-3 prose-strong:text-foreground prose-blockquote:border-border prose-blockquote:text-muted-foreground prose-code:font-mono prose-code:text-foreground prose-pre:overflow-x-auto prose-pre:rounded-md prose-pre:bg-muted prose-pre:p-4 prose-pre:font-mono prose-pre:text-foreground"
+      class="prose prose-neutral max-w-none pb-8 prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-3 prose-strong:text-foreground prose-blockquote:border-border prose-blockquote:text-muted-foreground prose-code:font-mono prose-code:text-foreground prose-pre:overflow-x-auto prose-pre:rounded-md prose-pre:bg-muted prose-pre:p-4 prose-pre:font-mono prose-pre:text-foreground dark:prose-invert"
     >
       <Content />
     </div>

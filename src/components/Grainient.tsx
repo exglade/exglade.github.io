@@ -1,5 +1,6 @@
 import { Mesh, Program, Renderer, Triangle } from "ogl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getResolvedThemeFromDocument, type ResolvedTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 interface GrainientProps {
@@ -22,11 +23,20 @@ interface GrainientProps {
   centerX?: number;
   centerY?: number;
   zoom?: number;
-  color1?: string;
-  color2?: string;
-  color3?: string;
+  palettes?: GrainientPalettes;
   className?: string;
 }
+
+type GrainientPalette = {
+  color1: string;
+  color2: string;
+  color3: string;
+};
+
+type GrainientPalettes = {
+  light: GrainientPalette;
+  dark: GrainientPalette;
+};
 
 type GrainientUniforms = {
   iTime: { value: number };
@@ -160,6 +170,7 @@ void main(){
 function syncUniforms(
   uniforms: GrainientUniforms,
   props: Omit<Required<GrainientProps>, "className">,
+  resolvedTheme: ResolvedTheme,
 ) {
   uniforms.uTimeSpeed.value = props.timeSpeed;
   uniforms.uColorBalance.value = props.colorBalance;
@@ -180,9 +191,11 @@ function syncUniforms(
   uniforms.uCenterOffset.value[0] = props.centerX;
   uniforms.uCenterOffset.value[1] = props.centerY;
   uniforms.uZoom.value = props.zoom;
-  uniforms.uColor1.value.set(hexToRgb(props.color1));
-  uniforms.uColor2.value.set(hexToRgb(props.color2));
-  uniforms.uColor3.value.set(hexToRgb(props.color3));
+
+  const palette = props.palettes[resolvedTheme];
+  uniforms.uColor1.value.set(hexToRgb(palette.color1));
+  uniforms.uColor2.value.set(hexToRgb(palette.color2));
+  uniforms.uColor3.value.set(hexToRgb(palette.color3));
 }
 
 const Grainient = ({
@@ -205,13 +218,39 @@ const Grainient = ({
   centerX = 0.0,
   centerY = 0.0,
   zoom = 0.9,
-  color1 = "#FF9FFC",
-  color2 = "#5227FF",
-  color3 = "#B19EEF",
+  palettes = {
+    light: {
+      color1: "#FF9FFC",
+      color2: "#5227FF",
+      color3: "#B19EEF",
+    },
+    dark: {
+      color1: "#563761",
+      color2: "#211f3f",
+      color3: "#05060f",
+    },
+  },
   className = "",
 }: GrainientProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const programRef = useRef<Program | null>(null);
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() =>
+    getResolvedThemeFromDocument(),
+  );
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setResolvedTheme(getResolvedThemeFromDocument());
+    });
+
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Init-only effect; prop changes are handled by the sync effect below.
   useEffect(() => {
@@ -234,6 +273,7 @@ const Grainient = ({
     container.appendChild(canvas);
 
     const geometry = new Triangle(gl);
+    const initialPalette = palettes[resolvedTheme];
     const program = new Program(gl, {
       vertex,
       fragment,
@@ -258,9 +298,9 @@ const Grainient = ({
         uSaturation: { value: saturation },
         uCenterOffset: { value: new Float32Array([centerX, centerY]) },
         uZoom: { value: zoom },
-        uColor1: { value: new Float32Array(hexToRgb(color1)) },
-        uColor2: { value: new Float32Array(hexToRgb(color2)) },
-        uColor3: { value: new Float32Array(hexToRgb(color3)) },
+        uColor1: { value: new Float32Array(hexToRgb(initialPalette.color1)) },
+        uColor2: { value: new Float32Array(hexToRgb(initialPalette.color2)) },
+        uColor3: { value: new Float32Array(hexToRgb(initialPalette.color3)) },
       },
     });
     programRef.current = program;
@@ -316,30 +356,32 @@ const Grainient = ({
     const program = programRef.current;
     if (!program) return;
 
-    syncUniforms(program.uniforms as GrainientUniforms, {
-      timeSpeed,
-      colorBalance,
-      warpStrength,
-      warpFrequency,
-      warpSpeed,
-      warpAmplitude,
-      blendAngle,
-      blendSoftness,
-      rotationAmount,
-      noiseScale,
-      grainAmount,
-      grainScale,
-      grainAnimated,
-      contrast,
-      gamma,
-      saturation,
-      centerX,
-      centerY,
-      zoom,
-      color1,
-      color2,
-      color3,
-    });
+    syncUniforms(
+      program.uniforms as GrainientUniforms,
+      {
+        timeSpeed,
+        colorBalance,
+        warpStrength,
+        warpFrequency,
+        warpSpeed,
+        warpAmplitude,
+        blendAngle,
+        blendSoftness,
+        rotationAmount,
+        noiseScale,
+        grainAmount,
+        grainScale,
+        grainAnimated,
+        contrast,
+        gamma,
+        saturation,
+        centerX,
+        centerY,
+        zoom,
+        palettes,
+      },
+      resolvedTheme,
+    );
   }, [
     timeSpeed,
     colorBalance,
@@ -360,9 +402,8 @@ const Grainient = ({
     centerX,
     centerY,
     zoom,
-    color1,
-    color2,
-    color3,
+    palettes,
+    resolvedTheme,
   ]);
 
   return (
