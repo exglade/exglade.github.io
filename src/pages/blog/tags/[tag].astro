@@ -1,0 +1,45 @@
+---
+import BackLink from "../../../components/blog/BackLink.astro";
+import BlogHeading from "../../../components/blog/BlogHeading.astro";
+import BlogPostList from "../../../components/blog/BlogPostList";
+import BlogLayout from "../../../layouts/BlogLayout.astro";
+import {
+  getBlogPostYearGroups,
+  getBlogTagArchives,
+  getPublishedBlogPosts,
+} from "../../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedBlogPosts();
+  const tagArchives = getBlogTagArchives(posts);
+
+  return tagArchives.map((archive) => ({
+    params: { tag: archive.slug },
+    props: { archive },
+  }));
+}
+
+const { archive } = Astro.props;
+const groups = getBlogPostYearGroups(archive.posts);
+---
+
+<BlogLayout
+  title={`${archive.label} — Blog | Kai Sheng`}
+  description={`Blog posts tagged ${archive.label} by Kai Sheng`}
+>
+  <header class="max-w-2xl py-8 md:py-12">
+    <p class="mb-3 text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">Tag</p>
+    <BackLink href="/blog/tags" label="Back to all tags" />
+    <BlogHeading>{archive.label}</BlogHeading>
+    <p class="mt-4 text-muted-foreground leading-relaxed">
+      {archive.posts.length}
+      {archive.posts.length === 1 ? " post" : " posts"}
+      tagged with {archive.label}.
+    </p>
+  </header>
+
+  <section aria-labelledby="tag-archive-heading">
+    <h2 id="tag-archive-heading" class="sr-only">Posts tagged {archive.label}</h2>
+    <BlogPostList groups={groups} />
+  </section>
+</BlogLayout>

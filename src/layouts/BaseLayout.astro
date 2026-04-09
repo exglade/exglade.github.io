@@ -4,7 +4,6 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
-  showFooter?: boolean;
   lang?: string;
   canonicalPath?: string;
   alternates?: {
@@ -16,7 +15,6 @@ interface Props {
 const {
   title,
   description = "Kai Sheng — Software Engineer",
-  showFooter = true,
   lang = "en",
   canonicalPath,
   alternates = [],
@@ -59,6 +57,12 @@ const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL.href}>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Kai Sheng RSS"
+      href={new URL("/rss.xml", Astro.site).href}
+    >
     {alternates.map((alternate) => (
       <link
         rel="alternate"
@@ -75,13 +79,6 @@ const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL.href}>
   </head>
   <body>
-    <div class="mx-auto max-w-(--max-width) px-4 md:px-6">
-      <slot />
-      {showFooter && (
-        <footer class="mt-16 border-t border-border py-8 text-center text-[0.85rem] text-muted-foreground">
-          &copy; {new Date().getFullYear()} Kai Sheng
-        </footer>
-      )}
-    </div>
+    <div class="mx-auto max-w-(--max-width) px-4 md:px-6"><slot /></div>
   </body>
 </html>

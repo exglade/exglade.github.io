@@ -1,14 +1,14 @@
 ---
 import { type HomeContent, localeLinks } from "@/data/home";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Grainient from "../shared/Grainient";
+import TextType from "../shared/TextType";
+import LanguageSwitcher from "../site/LanguageSwitcher";
+import PageNavigation from "../site/PageNavigation";
+import SocialLink from "../site/SocialLink.astro";
+import ThemeSwitcher from "../site/ThemeSwitcher";
 import ExperienceAccordion from "./ExperienceAccordion";
-import Grainient from "./Grainient";
-import LanguageSwitcher from "./LanguageSwitcher";
-import PageNavigation from "./PageNavigation";
 import SkillsSection from "./SkillsSection";
-import SocialLink from "./SocialLink.astro";
-import TextType from "./TextType";
-import ThemeSwitcher from "./ThemeSwitcher";
 
 type Props = {
   content: HomeContent;
@@ -23,7 +23,6 @@ const { content } = Astro.props;
   lang={content.lang}
   canonicalPath={content.path}
   alternates={localeLinks}
-  showFooter={false}
 >
   <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
     <Grainient

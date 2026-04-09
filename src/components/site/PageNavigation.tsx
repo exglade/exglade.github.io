@@ -1,12 +1,12 @@
 import { Fragment } from "react";
-import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "./ui/navigation-menu";
-import { Separator } from "./ui/separator";
+} from "@/components/ui/navigation-menu";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 type PageNavigationProps = {
   navItems: NavItem[];

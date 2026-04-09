@@ -2,6 +2,9 @@
 title: "Welcome to My Blog"
 pubDate: 2026-02-26
 description: "A short introduction and what to expect from this space."
+tags:
+  - Notes
+  - Engineering
 ---
 
 ## Hello, world!

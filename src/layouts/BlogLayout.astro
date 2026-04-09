@@ -1,0 +1,36 @@
+---
+import BlogFooter from "@/components/blog/BlogFooter.astro";
+import PageNavigation from "@/components/site/PageNavigation";
+import ThemeSwitcher from "@/components/site/ThemeSwitcher";
+import BaseLayout from "./BaseLayout.astro";
+
+type Props = {
+  title: string;
+  description: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div
+    class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,var(--blog-background-glow),transparent_36rem)]"
+    aria-hidden="true"
+  ></div>
+
+  <header class="py-8 md:py-12">
+    <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+      <PageNavigation
+        activeItemKey="blog"
+        navItems={[
+          { key: "portfolio", label: "Portfolio", href: "/", visible: true },
+          { key: "blog", label: "Blog", href: "/blog", visible: true },
+        ]}
+      />
+      <ThemeSwitcher client:load />
+    </div>
+  </header>
+
+  <main><slot /></main>
+  <BlogFooter />
+</BaseLayout>
