@@ -20,29 +20,42 @@ type ExperienceAccordionProps = {
 export default function ExperienceAccordion({ experiences }: ExperienceAccordionProps) {
   return (
     <Accordion type="single" collapsible>
-      {experiences.map((experience) => (
-        <AccordionItem key={experience.company} value={experience.company} className="border-muted">
-          <AccordionTrigger className="border-0 bg-transparent p-4">
-            <span className="flex flex-1 flex-col gap-0">
-              <span className="text-base font-semibold text-foreground">{experience.company}</span>
-              <span className="text-sm text-muted-foreground">{experience.title}</span>
-            </span>
-            <span className="mr-10 text-right text-sm font-normal text-muted-foreground">
-              {experience.years}
-            </span>
-          </AccordionTrigger>
-          <AccordionContent className="px-4 max-w-2xl text-sm">
-            <div className="flex flex-col">
-              <p className="text-muted-foreground">{experience.description}</p>
-              <ul className="flex list-disc flex-col gap-2 pl-5 text-sm text-muted-foreground">
-                {experience.impact.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+      {experiences.map((experience) => {
+        const seenImpactCounts = new Map<string, number>();
+
+        return (
+          <AccordionItem
+            key={experience.company}
+            value={experience.company}
+            className="border-muted"
+          >
+            <AccordionTrigger className="border-0 bg-transparent p-4">
+              <span className="flex flex-1 flex-col gap-0">
+                <span className="text-base font-semibold text-foreground">
+                  {experience.company}
+                </span>
+                <span className="text-sm text-muted-foreground">{experience.title}</span>
+              </span>
+              <span className="mr-10 text-right text-sm font-normal text-muted-foreground">
+                {experience.years}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent className="px-4 max-w-2xl text-sm">
+              <div className="flex flex-col">
+                <p className="text-muted-foreground">{experience.description}</p>
+                <ul className="flex list-disc flex-col gap-2 pl-5 text-sm text-muted-foreground">
+                  {experience.impact.map((item) => {
+                    const occurrence = seenImpactCounts.get(item) ?? 0;
+                    seenImpactCounts.set(item, occurrence + 1);
+
+                    return <li key={`${item}-${occurrence}`}>{item}</li>;
+                  })}
+                </ul>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
     </Accordion>
   );
 }
