@@ -31,6 +31,7 @@
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --radius: 0.625rem;
+  --blog-background-glow: oklch(0.92 0.05 190 / 55%);
 }
 
 html {
@@ -100,6 +101,7 @@ body {
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+  --blog-background-glow: oklch(0.36 0.08 230 / 28%);
 }
 
 @layer base {
@@ -141,5 +143,11 @@ body {
   code,
   pre {
     font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .blog-prose {
+    @apply prose prose-neutral max-w-none prose-headings:scroll-mt-8 prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-ul:text-muted-foreground prose-ol:text-muted-foreground prose-li:marker:text-foreground prose-blockquote:border-border prose-blockquote:text-muted-foreground prose-code:rounded-sm prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none prose-pre:overflow-x-auto prose-pre:rounded-md prose-pre:border prose-pre:border-border prose-pre:bg-muted prose-pre:p-4 prose-pre:font-mono prose-pre:text-foreground dark:prose-invert;
   }
 }
