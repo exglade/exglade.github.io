@@ -35,29 +35,35 @@ const tags = getBlogPostTags(post);
     <header class="max-w-2xl py-8 md:py-12">
       <BackLink href="/blog" label="Back to blog" />
       <BlogHeading>{post.data.title}</BlogHeading>
-      <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
+      <ul class="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <li>
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
+        </li>
         {tags.length > 0 && (
           <>
-            <Separator orientation="vertical" />
-            <ul class="flex list-none flex-wrap gap-2">
-              {tags.map((tag) => (
-                <li>
-                  <a href={getBlogTagUrl(tag.slug)}>
-                    <Badge variant="outline">{tag.label}</Badge>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <li aria-hidden="true">
+              <Separator orientation="vertical" />
+            </li>
+            <li>
+              <ul class="flex list-none flex-wrap gap-2" aria-label="Tags">
+                {tags.map((tag) => (
+                  <li>
+                    <a href={getBlogTagUrl(tag.slug)}>
+                      <Badge variant="outline">{tag.label}</Badge>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
           </>
         )}
-      </div>
+      </ul>
       {post.data.description && (
         <p class="mt-4 text-lg text-muted-foreground leading-relaxed">{post.data.description}</p>
       )}

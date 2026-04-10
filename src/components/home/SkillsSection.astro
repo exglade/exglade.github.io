@@ -36,26 +36,28 @@ const slugify = (value: string) =>
         >
           {group.title}
         </h3>
-        <div class="flex flex-wrap gap-2">
+        <ul class="flex flex-wrap gap-2" role="list">
           {group.skills.map((skill) =>
-            skill.href ? (
-              <a
-                href={skill.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${skill.label} official website`}
-                class:list={[
-                  badgeVariants(),
-                  "no-underline hover:no-underline focus:no-underline",
-                ]}
-              >
-                {skill.label}
-              </a>
-            ) : (
-              <span class={badgeVariants()}>{skill.label}</span>
-            ),
+            <li>
+              {skill.href ? (
+                <a
+                  href={skill.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${skill.label} official website`}
+                  class:list={[
+                    badgeVariants(),
+                    "no-underline hover:no-underline focus:no-underline",
+                  ]}
+                >
+                  {skill.label}
+                </a>
+              ) : (
+                <span class={badgeVariants()}>{skill.label}</span>
+              )}
+            </li>,
           )}
-        </div>
+        </ul>
       </section>
     );
   })}

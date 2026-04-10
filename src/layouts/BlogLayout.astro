@@ -23,13 +23,15 @@ const { title, description, navLabels = homeContentByLocale.en.nav, noIndex = fa
 
   <header class="py-8 md:py-12">
     <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
-      <PageNavigation
-        activeItemKey="blog"
-        navItems={[
-          { key: "portfolio", label: navLabels.portfolio, href: "/", visible: true },
-          { key: "blog", label: navLabels.blog, href: "/blog", visible: true },
-        ]}
-      />
+      <nav aria-label="Primary">
+        <PageNavigation
+          activeItemKey="blog"
+          navItems={[
+            { key: "portfolio", label: navLabels.portfolio, href: "/", visible: true },
+            { key: "blog", label: navLabels.blog, href: "/blog", visible: true },
+          ]}
+        />
+      </nav>
       <ThemeSwitcher client:load />
     </div>
   </header>

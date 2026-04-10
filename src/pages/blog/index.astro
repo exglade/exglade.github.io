@@ -12,11 +12,19 @@ const groups = getBlogPostYearGroups(posts);
 <BlogLayout title="Blog - Kai Sheng" description="Blog posts by Kai Sheng">
   <header class="max-w-2xl py-8 md:py-12">
     <BlogHeading>Blog</BlogHeading>
-    <div class="mt-3 flex items-center gap-3 text-sm text-muted-foreground">
-      <a class="underline-offset-4 hover:underline" href="/blog/tags">Tags</a>
-      <Separator orientation="vertical" />
-      <a class="underline-offset-4 hover:underline" href="/rss.xml">RSS</a>
-    </div>
+    <nav aria-label="Blog links" class="mt-3">
+      <ul class="flex items-center gap-3 text-sm text-muted-foreground">
+        <li>
+          <a class="underline-offset-4 hover:underline" href="/blog/tags">Tags</a>
+        </li>
+        <li aria-hidden="true">
+          <Separator orientation="vertical" />
+        </li>
+        <li>
+          <a class="underline-offset-4 hover:underline" href="/rss.xml">RSS</a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <section aria-labelledby="blog-archive-heading">
