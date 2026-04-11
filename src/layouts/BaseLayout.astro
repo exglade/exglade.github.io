@@ -6,6 +6,7 @@ interface Props {
   description?: string;
   lang?: string;
   canonicalPath?: string;
+  socialImage?: string;
   noIndex?: boolean;
   alternates?: {
     href: string;
@@ -18,11 +19,13 @@ const {
   description = "Kai Sheng — Software Engineer",
   lang = "en",
   canonicalPath,
+  socialImage = "/og-image-light.png",
   noIndex = false,
   alternates = [],
 } = Astro.props;
 
 const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(socialImage, Astro.site);
 ---
 
 <!doctype html>
@@ -80,6 +83,7 @@ const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:url" content={canonicalURL.href}>
+    <meta property="og:image" content={socialImageURL.href}>
   </head>
   <body>
     <div class="mx-auto max-w-(--max-width) px-4 md:px-6"><slot /></div>

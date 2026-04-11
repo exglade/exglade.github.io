@@ -9,13 +9,20 @@ type Props = {
   title: string;
   description: string;
   navLabels?: HomeContent["nav"];
+  socialImage?: string;
   noIndex?: boolean;
 };
 
-const { title, description, navLabels = homeContentByLocale.en.nav, noIndex = false } = Astro.props;
+const {
+  title,
+  description,
+  navLabels = homeContentByLocale.en.nav,
+  socialImage,
+  noIndex = false,
+} = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} noIndex={noIndex}>
+<BaseLayout title={title} description={description} socialImage={socialImage} noIndex={noIndex}>
   <div
     class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,var(--blog-background-glow),transparent_36rem)]"
     aria-hidden="true"

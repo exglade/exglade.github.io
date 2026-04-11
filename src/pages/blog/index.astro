@@ -1,9 +1,9 @@
 ---
-import BlogHeading from "../../components/blog/BlogHeading.astro";
-import BlogPostList from "../../components/blog/BlogPostList";
-import { Separator } from "../../components/ui/separator";
-import BlogLayout from "../../layouts/BlogLayout.astro";
-import { getBlogPostYearGroups, getPublishedBlogPosts } from "../../lib/blog";
+import BlogHeading from "@/components/blog/BlogHeading.astro";
+import BlogPostList from "@/components/blog/BlogPostList";
+import { Separator } from "@/components/ui/separator";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import { getBlogPostYearGroups, getPublishedBlogPosts } from "@/lib/blog";
 
 const posts = await getPublishedBlogPosts();
 const groups = getBlogPostYearGroups(posts);

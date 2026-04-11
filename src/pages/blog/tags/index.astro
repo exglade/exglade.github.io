@@ -1,9 +1,9 @@
 ---
-import BackLink from "../../../components/blog/BackLink.astro";
-import BlogHeading from "../../../components/blog/BlogHeading.astro";
-import { Badge } from "../../../components/ui/badge";
-import BlogLayout from "../../../layouts/BlogLayout.astro";
-import { getBlogTagArchives, getBlogTagUrl, getPublishedBlogPosts } from "../../../lib/blog";
+import BackLink from "@/components/blog/BackLink.astro";
+import BlogHeading from "@/components/blog/BlogHeading.astro";
+import { Badge } from "@/components/ui/badge";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import { getBlogTagArchives, getBlogTagUrl, getPublishedBlogPosts } from "@/lib/blog";
 
 const posts = await getPublishedBlogPosts();
 const tagArchives = getBlogTagArchives(posts);

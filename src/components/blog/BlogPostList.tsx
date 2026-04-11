@@ -13,12 +13,12 @@ export default function BlogPostList({ groups }: BlogPostListProps) {
     <div className="flex flex-col gap-10 py-8">
       {groups.map((group) => (
         <section key={group.year} aria-labelledby={`blog-year-${group.year}`} className="space-y-4">
-          <h2
+          <h3
             id={`blog-year-${group.year}`}
             className="text-sm font-semibold tracking-[0.12em] text-muted-foreground uppercase"
           >
             {group.year}
-          </h2>
+          </h3>
           <ul className="flex list-none flex-col gap-4">
             {group.posts.map((post) => (
               <li key={post.id}>

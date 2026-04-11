@@ -1,13 +1,13 @@
 ---
-import BackLink from "../../../components/blog/BackLink.astro";
-import BlogHeading from "../../../components/blog/BlogHeading.astro";
-import BlogPostList from "../../../components/blog/BlogPostList";
-import BlogLayout from "../../../layouts/BlogLayout.astro";
+import BackLink from "@/components/blog/BackLink.astro";
+import BlogHeading from "@/components/blog/BlogHeading.astro";
+import BlogPostList from "@/components/blog/BlogPostList";
+import BlogLayout from "@/layouts/BlogLayout.astro";
 import {
   getBlogPostYearGroups,
   getBlogTagArchives,
   getPublishedBlogPosts,
-} from "../../../lib/blog";
+} from "@/lib/blog";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();

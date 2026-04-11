@@ -1,16 +1,16 @@
 ---
 import { render } from "astro:content";
-import BackLink from "../../components/blog/BackLink.astro";
-import BlogHeading from "../../components/blog/BlogHeading.astro";
-import { Badge } from "../../components/ui/badge";
-import { Separator } from "../../components/ui/separator";
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import BackLink from "@/components/blog/BackLink.astro";
+import BlogHeading from "@/components/blog/BlogHeading.astro";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import BlogLayout from "@/layouts/BlogLayout.astro";
 import {
   getBlogPostTags,
   getBlogPostUrl,
   getBlogTagUrl,
   getPublishedBlogPosts,
-} from "../../lib/blog";
+} from "@/lib/blog";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -30,6 +30,7 @@ const tags = getBlogPostTags(post);
   title={`${post.data.title} | Kai Sheng`}
   description={post.data.description || post.data.title}
   noIndex={post.data.draft === true}
+  socialImage={post.data.image}
 >
   <article>
     <header class="max-w-2xl py-8 md:py-12">
