@@ -1,5 +1,5 @@
 ---
-import { badgeVariants } from "@/components/ui/badge";
+import Badge from "@/components/ui/badge.astro";
 
 type Skill = {
   label: string;
@@ -36,24 +36,21 @@ const slugify = (value: string) =>
         >
           {group.title}
         </h3>
-        <ul class="flex flex-wrap gap-2" role="list">
+        <ul class="flex flex-wrap gap-2">
           {group.skills.map((skill) =>
             <li>
               {skill.href ? (
-                <a
+                <Badge
+                  as="a"
                   href={skill.href}
                   target="_blank"
-                  rel="noopener noreferrer"
                   aria-label={`${skill.label} official website`}
-                  class:list={[
-                    badgeVariants(),
-                    "no-underline hover:no-underline focus:no-underline",
-                  ]}
+                  class="no-underline hover:no-underline focus:no-underline"
                 >
                   {skill.label}
-                </a>
+                </Badge>
               ) : (
-                <span class={badgeVariants()}>{skill.label}</span>
+                <Badge>{skill.label}</Badge>
               )}
             </li>,
           )}

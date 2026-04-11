@@ -2,7 +2,7 @@
 import { render } from "astro:content";
 import BackLink from "@/components/blog/BackLink.astro";
 import BlogHeading from "@/components/blog/BlogHeading.astro";
-import { Badge } from "@/components/ui/badge";
+import Badge from "@/components/ui/badge.astro";
 import { Separator } from "@/components/ui/separator";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import {
@@ -55,9 +55,9 @@ const tags = getBlogPostTags(post);
               <ul class="flex list-none flex-wrap gap-2" aria-label="Tags">
                 {tags.map((tag) => (
                   <li>
-                    <a href={getBlogTagUrl(tag.slug)}>
-                      <Badge variant="outline">{tag.label}</Badge>
-                    </a>
+                    <Badge as="a" href={getBlogTagUrl(tag.slug)} variant="outline">
+                      {tag.label}
+                    </Badge>
                   </li>
                 ))}
               </ul>
