@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { cloudflareAnalyticsToken, googleSiteVerification, siteConfig } from "@/lib/site";
 
 interface Props {
   title: string;
@@ -7,7 +8,9 @@ interface Props {
   lang?: string;
   canonicalPath?: string;
   socialImage?: string;
+  ogType?: "website" | "article" | "profile";
   noIndex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
   alternates?: {
     href: string;
     lang: string;
@@ -16,16 +19,28 @@ interface Props {
 
 const {
   title,
-  description = "Kai Sheng — Software Engineer",
+  description = siteConfig.defaultDescription,
   lang = "en",
   canonicalPath,
-  socialImage = "/og-image-light.png",
+  socialImage = siteConfig.defaultSocialImage,
+  ogType = "website",
   noIndex = false,
+  structuredData,
   alternates = [],
 } = Astro.props;
 
 const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(socialImage, Astro.site);
+const structuredDataItems = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
+const serializeStructuredData = (data: Record<string, unknown>) =>
+  JSON.stringify(data).replace(/</g, "\\u003c");
+const cloudflareBeacon = cloudflareAnalyticsToken
+  ? JSON.stringify({ token: cloudflareAnalyticsToken })
+  : undefined;
 ---
 
 <!doctype html>
@@ -57,6 +72,9 @@ const socialImageURL = new URL(socialImage, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description}>
     {noIndex && <meta name="robots" content="noindex" />}
+    {googleSiteVerification && (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      )}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -79,11 +97,29 @@ const socialImageURL = new URL(socialImage, Astro.site);
     <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site).href}>
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content={ogType}>
+    <meta property="og:site_name" content={siteConfig.name}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:url" content={canonicalURL.href}>
     <meta property="og:image" content={socialImageURL.href}>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={socialImageURL.href}>
+
+    {structuredDataItems.map((data) => (
+        <script type="application/ld+json" set:html={serializeStructuredData(data)} />
+      ))}
+    {cloudflareBeacon && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={cloudflareBeacon}
+        />
+      )}
   </head>
   <body>
     <div class="mx-auto max-w-(--max-width) px-4 md:px-6"><slot /></div>

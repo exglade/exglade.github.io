@@ -3,11 +3,7 @@ import BackLink from "@/components/blog/BackLink.astro";
 import BlogHeading from "@/components/blog/BlogHeading.astro";
 import BlogPostList from "@/components/blog/BlogPostList";
 import BlogLayout from "@/layouts/BlogLayout.astro";
-import {
-  getBlogPostYearGroups,
-  getBlogTagArchives,
-  getPublishedBlogPosts,
-} from "@/lib/blog";
+import { getBlogPostYearGroups, getBlogTagArchives, getPublishedBlogPosts } from "@/lib/blog";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -26,6 +22,7 @@ const groups = getBlogPostYearGroups(archive.posts);
 <BlogLayout
   title={`${archive.label} — Blog | Kai Sheng`}
   description={`Blog posts tagged ${archive.label} by Kai Sheng`}
+  canonicalPath={`/blog/tags/${archive.slug}/`}
 >
   <header class="max-w-2xl py-8 md:py-12">
     <BackLink href="/blog/tags" label="Back to all tags" />

@@ -9,20 +9,35 @@ type Props = {
   title: string;
   description: string;
   navLabels?: HomeContent["nav"];
+  canonicalPath?: string;
   socialImage?: string;
+  ogType?: "website" | "article";
   noIndex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 };
 
 const {
   title,
   description,
   navLabels = homeContentByLocale.en.nav,
+  canonicalPath,
   socialImage,
+  ogType = "website",
   noIndex = false,
+  structuredData,
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} socialImage={socialImage} noIndex={noIndex}>
+<BaseLayout
+  title={title}
+  description={description}
+  lang="en"
+  canonicalPath={canonicalPath}
+  socialImage={socialImage}
+  ogType={ogType}
+  noIndex={noIndex}
+  structuredData={structuredData}
+>
   <div
     class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,var(--blog-background-glow),transparent_36rem)]"
     aria-hidden="true"

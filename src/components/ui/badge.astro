@@ -1,6 +1,6 @@
 ---
-import { cva, type VariantProps } from "class-variance-authority";
 import type { HTMLAttributes } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
@@ -41,7 +41,8 @@ const {
   ...rest
 } = Astro.props as Props;
 
-const resolvedRel = rel ?? (Component === "a" && target === "_blank" ? "noopener noreferrer" : undefined);
+const resolvedRel =
+  rel ?? (Component === "a" && target === "_blank" ? "noopener noreferrer" : undefined);
 ---
 
 <Component

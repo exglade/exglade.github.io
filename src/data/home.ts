@@ -183,7 +183,7 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
     locale: "ja",
     lang: "ja",
     path: "/ja/",
-    title: "Kai Sheng | 日本語",
+    title: "Kai Sheng",
     description:
       "スケールするシステムと、長く機能するチームをつくる。実用性、保守性、進化し続ける設計を大切にするエンジニアリングリーダーです。",
     nav: {
@@ -244,7 +244,7 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
     locale: "zh",
     lang: "zh-CN",
     path: "/zh/",
-    title: "Kai Sheng | 中文",
+    title: "Kai Sheng",
     description:
       "构建能扩展的系统，以及能长期运转的团队。我重视务实、全局的工程方法，打造真正解决问题、可维护并能持续演进的产品和系统。",
     nav: {

@@ -9,7 +9,11 @@ const posts = await getPublishedBlogPosts();
 const tagArchives = getBlogTagArchives(posts);
 ---
 
-<BlogLayout title="Tags — Blog | Kai Sheng" description="Blog tags from Kai Sheng">
+<BlogLayout
+  title="Tags — Blog | Kai Sheng"
+  description="Browse my software engineering notes by topic."
+  canonicalPath="/blog/tags/"
+>
   <header class="max-w-2xl py-8 md:py-12">
     <BackLink href="/blog" label="Back to blog" />
     <BlogHeading>Tags</BlogHeading>

@@ -9,6 +9,7 @@ import SocialLink from "@/components/site/SocialLink.astro";
 import ThemeSwitcher from "@/components/site/ThemeSwitcher";
 import { type HomeContent, localeLinks } from "@/data/home";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPersonStructuredData } from "@/lib/site";
 
 type Props = {
   content: HomeContent;
@@ -23,6 +24,11 @@ const { content } = Astro.props;
   lang={content.lang}
   canonicalPath={content.path}
   alternates={localeLinks}
+  structuredData={getPersonStructuredData({
+    description: content.description,
+    lang: content.lang,
+    path: content.path,
+  })}
 >
   <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
     <Grainient
@@ -75,11 +81,7 @@ const { content } = Astro.props;
           />
         </nav>
         <div class="flex items-center gap-1">
-          <LanguageSwitcher
-            client:load
-            currentLocale={content.locale}
-            localeLinks={localeLinks}
-          />
+          <LanguageSwitcher client:load currentLocale={content.locale} localeLinks={localeLinks} />
           <ThemeSwitcher client:load />
         </div>
       </div>
@@ -105,7 +107,9 @@ const { content } = Astro.props;
 
         <section aria-labelledby="about-heading" class="flex flex-col gap-4">
           <h2 id="about-heading" class="sr-only">{content.intro.aboutLabel}</h2>
-          <div class="flex flex-col gap-4 text-sm text-muted-foreground leading-relaxed md:text-base">
+          <div
+            class="flex flex-col gap-4 text-sm text-muted-foreground leading-relaxed md:text-base"
+          >
             {content.intro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </section>
