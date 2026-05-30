@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { render } from "astro:content";
 import BackLink from "@/components/blog/BackLink.astro";
 import BlogHeading from "@/components/blog/BlogHeading.astro";
@@ -22,7 +23,7 @@ const { Content } = await render(post);
 const tags = getBlogPostTags(post);
 const postUrl = getBlogPostUrl(post);
 const postDescription = post.data.description || post.data.title;
-const postImage = post.data.image || siteConfig.defaultSocialImage;
+const postImage = post.data.image?.src ?? siteConfig.defaultSocialImage;
 const blogPostStructuredData = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -93,6 +94,16 @@ const blogPostStructuredData = {
         <p class="mt-4 text-lg text-muted-foreground leading-relaxed">{post.data.description}</p>
       )}
     </header>
+
+    {post.data.image && (
+        <Image
+          src={post.data.image}
+          alt=""
+          class="mb-8 aspect-[16/9] w-full rounded-lg border object-cover"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 768px) 768px, calc(100vw - 2rem)"
+        />
+      )}
 
     <Separator />
 
