@@ -3,7 +3,7 @@ export const siteConfig = {
   url: "https://kaisheng.dev",
   defaultTitle: "Kai Sheng",
   defaultDescription:
-    "Building systems that scale. Teams that last. I like to take a pragmatic and holistic approach, building products that solve meaningful problems, and systems and teams that remain practical, maintainable, and able to evolve.",
+    "Software engineering leader focused on scalable systems, platform engineering, product engineering, and teams that last.",
   defaultSocialImage: "/og-image-light.png",
   cloudflareAnalyticsToken: "",
   googleSiteVerification: "",

@@ -36,6 +36,7 @@ export type HomeContent = {
     blog: string;
   };
   intro: {
+    displayName: string;
     eyebrow: string[];
     headline: string;
     aboutLabel: string;
@@ -122,15 +123,16 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
     locale: "en",
     lang: "en",
     path: "/",
-    title: "Kai Sheng",
+    title: "Kai Sheng | Engineering Leader",
     description:
-      "Building systems that scale. Teams that last. I like to take a pragmatic and holistic approach, building products that solve meaningful problems, and systems and teams that remain practical, maintainable, and able to evolve.",
+      "Software engineering leader focused on scalable systems, platform engineering, product engineering, and teams that last.",
     nav: {
       portfolio: "Portfolio",
       blog: "Blog",
     },
     intro: {
-      eyebrow: ["KAI SHENG", "凯升", "Kai", "カイ", "카이"],
+      displayName: "Kai Sheng",
+      eyebrow: ["凯升", "カイ", "카이"],
       headline: "Building systems that scale. Teams that last.",
       aboutLabel: "About",
       paragraphs: [
@@ -183,7 +185,7 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
     locale: "ja",
     lang: "ja",
     path: "/ja/",
-    title: "Kai Sheng",
+    title: "Kai Sheng | エンジニアリングリーダー",
     description:
       "スケールするシステムと、長く機能するチームをつくる。実用性、保守性、進化し続ける設計を大切にするエンジニアリングリーダーです。",
     nav: {
@@ -191,7 +193,8 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
       blog: "ブログ",
     },
     intro: {
-      eyebrow: ["KAI SHENG", "凯升", "Kai", "カイ", "카이"],
+      displayName: "カイ",
+      eyebrow: ["Kai Sheng", "凯升", "카이"],
       headline: "スケールするシステムを。長く機能するチームを。",
       aboutLabel: "プロフィール",
       paragraphs: [
@@ -244,7 +247,7 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
     locale: "zh",
     lang: "zh-CN",
     path: "/zh/",
-    title: "Kai Sheng",
+    title: "Kai Sheng | 软件工程领导者",
     description:
       "构建能扩展的系统，以及能长期运转的团队。我重视务实、全局的工程方法，打造真正解决问题、可维护并能持续演进的产品和系统。",
     nav: {
@@ -252,7 +255,8 @@ export const homeContentByLocale: Record<LocaleCode, HomeContent> = {
       blog: "博客",
     },
     intro: {
-      eyebrow: ["KAI SHENG", "凯升", "Kai", "カイ", "카이"],
+      displayName: "凯升",
+      eyebrow: ["Kai Sheng", "カイ", "카이"],
       headline: "构建能扩展的系统。打造能长期运转的团队。",
       aboutLabel: "关于",
       paragraphs: [
