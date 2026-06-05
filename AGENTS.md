@@ -2,12 +2,12 @@
 
 ## Build And Test Commands
 
-- `npm run dev` starts the local Astro development server
-- `npm run build` verifies the production static build
-- `npm run preview` previews the built `dist` output
-- `npm run check` is the standard final validation command
-- `npm run format` applies Biome formatting
-- `npm run check:write` applies Biome formatting and safe fixes
+- `pnpm dev` starts the local Astro development server
+- `pnpm build` verifies the production static build
+- `pnpm preview` previews the built `dist` output
+- `pnpm check` is the standard final validation command
+- `pnpm format` applies Biome formatting
+- `pnpm check:write` applies Biome formatting and safe fixes
 - No dedicated unit or end-to-end test runner is currently configured
 
 ## Component Rules
@@ -26,8 +26,8 @@
 
 ## Testing Instructions
 
-- Run `npm run check` before handoff
-- Run `npm run build` for page, route, content, hydration, or generated-output changes
+- Run `pnpm check` before handoff
+- Run `pnpm build` for page, route, content, hydration, or generated-output changes
 - For interactive UI, verify keyboard behavior, responsive layout, and hydration intent
 - If Biome quick fixes change intended behavior, adjust the code
 - Use suppressions only when the rule is wrong for that case
