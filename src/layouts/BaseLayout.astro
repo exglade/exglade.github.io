@@ -73,8 +73,8 @@ const cloudflareBeacon = cloudflareAnalyticsToken
     <meta name="description" content={description}>
     {noIndex && <meta name="robots" content="noindex" />}
     {googleSiteVerification && (
-        <meta name="google-site-verification" content={googleSiteVerification} />
-      )}
+      <meta name="google-site-verification" content={googleSiteVerification} />
+    )}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -111,15 +111,15 @@ const cloudflareBeacon = cloudflareAnalyticsToken
     <meta name="twitter:image" content={socialImageURL.href}>
 
     {structuredDataItems.map((data) => (
-        <script type="application/ld+json" set:html={serializeStructuredData(data)} />
-      ))}
+      <script type="application/ld+json" set:html={serializeStructuredData(data)} />
+    ))}
     {cloudflareBeacon && (
-        <script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={cloudflareBeacon}
-        />
-      )}
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={cloudflareBeacon}
+      />
+    )}
   </head>
   <body>
     <div class="mx-auto max-w-(--max-width) px-4 md:px-6"><slot /></div>

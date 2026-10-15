@@ -96,14 +96,14 @@ const blogPostStructuredData = {
     </header>
 
     {post.data.image && (
-        <Image
-          src={post.data.image}
-          alt=""
-          class="mb-8 aspect-[16/9] w-full rounded-lg border object-cover"
-          widths={[640, 960, 1280, 1600]}
-          sizes="(min-width: 768px) 768px, calc(100vw - 2rem)"
-        />
-      )}
+      <Image
+        src={post.data.image}
+        alt=""
+        class="mb-8 aspect-[16/9] w-full rounded-lg border object-cover"
+        widths={[640, 960, 1280, 1600]}
+        sizes="(min-width: 768px) 768px, calc(100vw - 2rem)"
+      />
+    )}
 
     <Separator />
 
